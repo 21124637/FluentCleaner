@@ -61,6 +61,8 @@ FluentCleaner comes in two flavors. Same cleaning engine and winapp2.ini parser 
 
 Older versions of both are available in [Releases](https://github.com/builtbybel/FluentCleaner/releases).
 
+> 💬 **Classic or Modern?** [Vote here](https://github.com/builtbybel/FluentCleaner/discussions/100) — curious which one people actually end up using day to day.
+
 ## ❤️ Support
 
 no company behind this, no investors, no marketing department. just one person building a tool because the alternative got worse every year. every bit of support helps keep it going
