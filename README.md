@@ -61,6 +61,15 @@ FluentCleaner comes in two flavors. Same cleaning engine and winapp2.ini parser 
 
 Older versions of both are available in [Releases](https://github.com/builtbybel/FluentCleaner/releases).
 
+## ❤️ Support
+
+no company behind this, no investors, no marketing department. just one person building a tool because the alternative got worse every year. every bit of support helps keep it going
+
+| PayPal | Ko-fi |
+|---|---|
+| [Donate via PayPal](https://www.paypal.com/donate/?hosted_button_id=99X8UQJQP96WN) | [Support on Ko-fi](https://ko-fi.com/builtbybel) |
+
+small start, same as CCleaner once was
 
 ## FAQ
 
