@@ -44,17 +44,23 @@ here's a first preview so you can get a feel for the direction. i might end up f
 if you like it, cool. if not, also fair
 
 ## 🚀 Download Latest Stable
+FluentCleaner comes in two flavors. Same cleaning engine and winapp2.ini parser underneath, different UI and runtime story.
 
-[⬇ Download Latest FluentCleaner](https://github.com/builtbybel/FluentCleaner/releases/latest/download/FluentCleaner-win-x64.zip)
+|  | **FluentCleaner** (WinUI 3) | **FluentCleaner Classic** |
+|---|---|---|
+| Framework | .NET 10 + Windows App SDK | .NET Framework 4.8 (WinForms) |
+| Deployment | self-contained (runtime bundled) | framework-dependent (uses the runtime already on your system) |
+| Unpacked size | ~140 MB | ~3.57 MB |
+| Files | 243 | 20 |
+| Platform | x64 / ARM64, Windows 10 build 17763+ | practically any Windows |
+| Shared engine | `FluentCleaner.Core` (netstandard2.0) — scan/clean logic, Winapp2.ini parser | same |
+| Requirements | Windows 10 2004 (Build 19041) or later + [Windows App SDK 2.0.1 runtime](https://aka.ms/windowsappsdk/2.0/2.0.1/windowsappruntimeinstall-x64.exe) (installed once, separately) | none — uses whatever .NET Framework is already on your system |
+| Download | [⬇ Latest](https://github.com/builtbybel/FluentCleaner/releases/latest/download/FluentCleaner-win-x64.zip) | [⬇ Latest](https://github.com/builtbybel/FluentCleaner/releases/latest/download/FluentCleaner-Classic-net48.zip) · [more info](https://github.com/builtbybel/FluentCleaner/releases/tag/classic-1.0.0) |
 
-Older versions are available below.
-https://github.com/builtbybel/FluentCleaner/releases
+**Not sure which one to grab?** If you want the modern look and don't mind installing the Windows App SDK once, go with the main version. If you want something tiny, portable, and framework-dependent (or you're on an older/locked-down machine), grab Classic.
 
-### Requirements
-The Windows App SDK runtime is the only thing it needs. It's a native WinUI app, so that runtime is the foundation it runs on (like .net framework back in the day). install it once and you're good, the rest ships inside FluentCleaner
+Older versions of both are available in [Releases](https://github.com/builtbybel/FluentCleaner/releases).
 
-- Windows 10 2004 (Build 19041) or later
-- [Windows App SDK 2.0.1 ](https://aka.ms/windowsappsdk/2.0/2.0.1/windowsappruntimeinstall-x64.exe) this needs to be installed separately
 
 ## FAQ
 
