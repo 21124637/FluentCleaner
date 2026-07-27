@@ -30,7 +30,7 @@ Every language file begins with three metadata fields:
 }
 ```
 
-- `_Meta_LanguageDisplayName` is the name shown in the language selector
+- `_Meta_LanguageDisplayName` is the English name shown in the language selector **(for example, Bulgarian, not Български)**
 - `_Meta_TranslatorName` adds your credit to the About page
 - `_Meta_TranslatorWebsite` makes the credit clickable when it contains a valid website
 
