@@ -28,8 +28,6 @@
     "BasicSettings_RestartTitle": "需要重启",
     "BasicSettings_RestartMessage": "语言更改将在重启 FluentCleaner 后生效。是否立即重启？",
     "BasicSettings_LangSystem": "跟随系统",
-    "BasicSettings_LangEnglish": "English",
-    "BasicSettings_LangGerman": "Deutsch",
     "Main_NavCleaner": "清理器",
     "Main_NavCustom": "自定义规则",
     "Main_NavOptions": "设置",

@@ -28,8 +28,6 @@
     "BasicSettings_RestartTitle":  "Απαιτείται επανεκκίνηση",
     "BasicSettings_RestartMessage":  "Η αλλαγή γλώσσας θα τεθεί σε ισχύ μετά την επανεκκίνηση του FluentCleaner. Επανεκκινήστε τώρα.?",
     "BasicSettings_LangSystem":  "Προεπιλογή συστήματος",
-    "BasicSettings_LangEnglish":  "Αγγλικά",
-    "BasicSettings_LangGerman":  "Γερμανικά",
     "Main_NavCleaner":  "Καθαρισμός",
     "Main_NavCustom":  "Προσαρμογή",
     "Main_NavOptions":  "Επιλογές",

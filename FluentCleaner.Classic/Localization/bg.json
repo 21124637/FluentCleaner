@@ -28,8 +28,6 @@
     "BasicSettings_RestartTitle": "Необходим е рестарт",
     "BasicSettings_RestartMessage": "Промяната на езика ще влезе в сила след рестартиране на FluentCleaner. Да се рестартира ли сега?",
     "BasicSettings_LangSystem": "Стандартен за системата",
-    "BasicSettings_LangEnglish": "Английски",
-    "BasicSettings_LangGerman": "Немски",
     "Main_NavCleaner": "Почистване",
     "Main_NavCustom": "Персонални",
     "Main_NavOptions": "Настройки",

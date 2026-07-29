@@ -24,13 +24,15 @@ Every language file begins with three metadata fields:
 
 ```json
 {
-  "_Meta_LanguageDisplayName": "Français",
+  "_Meta_LanguageDisplayName": "Français (French)",
   "_Meta_TranslatorName": "Your Name",
   "_Meta_TranslatorWebsite": "https://example.com"
 }
 ```
 
-- `_Meta_LanguageDisplayName` is the English name shown in the language selector **(for example, Bulgarian, not Български)**
+- `_Meta_LanguageDisplayName` is the final name shown in the language selector
+  - For languages using the Latin alphabet, combine the native and English names when useful, for example `Deutsch (German)` or `Français (French)`
+  - For languages using another writing system, use a recognizable English name, for example `Bulgarian`, `Greek`, or `Chinese (Simplified)`
 - `_Meta_TranslatorName` adds your credit to the About page
 - `_Meta_TranslatorWebsite` makes the credit clickable when it contains a valid website
 
