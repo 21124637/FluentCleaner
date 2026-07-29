@@ -1,7 +1,7 @@
 > [!CAUTION]
 > ## ⚠️ Beware of Fake FluentCleaner Websites
 >
-> **FluentCleaner has no affiliation with `fluentcleaner.org`.**
+> **FluentCleaner has no affiliation with `fluentcleaner.org`**
 >
 > The **only official source** for FluentCleaner is **this GitHub repository**. I do not own, operate, or endorse that website or any other third-party download site.
 >

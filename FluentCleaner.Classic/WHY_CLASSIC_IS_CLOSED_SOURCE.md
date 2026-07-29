@@ -1,6 +1,6 @@
-# Why FluentCleaner Classic is not open source — yet
+# Why FluentCleaner Classic is not open source - yet
 
-FluentCleaner Classic is free to use, but its source code is not public right now. That is a deliberate choice — and not a contradiction.
+FluentCleaner Classic is free to use, but its source code is not public right now. That is a deliberate choice and not a contradiction.
 
 The modern WinUI version of FluentCleaner is open source. `FluentCleaner.Core` is open source too, including the shared parser, models and common infrastructure used by both editions. Classic's runtime localization files are also public, so anyone can inspect, improve or add a translation without recompiling the app.
 
@@ -42,8 +42,7 @@ The Classic UI and its edition-specific source remain private for now.
 
 No permanent decision has been made. Classic may become open source later, parts of it may be shared gradually, or it may continue as a closely maintained companion to the open modern edition.
 
-Time — and the direction the project takes — will decide.
-
+Time, and the direction the project takes, will decide
 For now, keeping Classic private gives me less pressure, more creative freedom and the chance to build something distinctive before the world starts making copies of it.
 
 **Closed today does not mean closed forever. It means Classic gets the space to become itself first.**
