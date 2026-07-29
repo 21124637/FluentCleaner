@@ -40,7 +40,7 @@ Translator name and website are optional, but we would love to give contributors
 
 When your translation is ready, you can:
 
-- Open a pull request and add the JSON file to the `Localization` folder
+- Open a pull request and add the JSON file to the `Localization` folder https://github.com/builtbybel/FluentCleaner/tree/main/FluentCleaner.Classic/Localization
 - Open a GitHub issue and attach the completed JSON file
 
 Corrections and improvements to existing translations are just as welcome as entirely new languages.
