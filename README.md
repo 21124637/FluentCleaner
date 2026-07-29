@@ -100,6 +100,17 @@ FluentCleaner just gives you more control over what exactly gets cleaned
 </details>
 
 <details>
+<summary>FluentCleaner shows "Unknown Hard Error" or won't launch</summary>
+
+the modern version requires the exact [Windows App SDK 2.0.1 x64 runtime](https://aka.ms/windowsappsdk/2.0/2.0.1/windowsappruntimeinstall-x64.exe).
+an older or newer Windows App SDK runtime will not work.
+
+after installing it, restart Windows so the runtime can register properly.
+if the problem continues, add the exact error and your Windows version to [issue #85](https://github.com/builtbybel/FluentCleaner/issues/85).
+
+</details>
+
+<details>
 <summary>what even is winapp2.ini?</summary>
 
 a community-maintained database of cleaning rules for Windows apps,
