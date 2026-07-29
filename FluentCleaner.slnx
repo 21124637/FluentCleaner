@@ -10,6 +10,8 @@
     <Platform Solution="*|x86" Project="x86" />
     <Deploy />
   </Project>
+  <Project Path="FluentCleaner.Core/FluentCleaner.Core.csproj" />
+  <Project Path="FluentCleaner.Classic/FluentCleaner.Classic.csproj" />
 </Solution>
 
 

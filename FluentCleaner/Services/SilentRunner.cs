@@ -101,7 +101,11 @@ public static class SilentRunner
                     UseShellExecute = false,
                     CreateNoWindow  = true
                 });
-                if (p is not null) await p.WaitForExitAsync();
+                if (p is not null)
+                {
+                    using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+                    try { await p.WaitForExitAsync(cts.Token); } catch (OperationCanceledException) { }
+                }
             }
             catch { }
         }

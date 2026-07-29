@@ -44,7 +44,7 @@
   <data name="MenuCleanEntry.Text"><value>Bereinigen</value></data>
   <data name="MenuExplainEntry.Text"><value>Mit KI erklären</value></data>
   <data name="MenuShowSource.Text"><value>Quelle anzeigen</value></data>
-  <data name="LblAIDesc.Text"><value>Rechtsklick auf einen Eintrag auf der Cleaner-Seite → Mit KI erklären. Powered by Groq (llama-3.3-70b) — kostenlos, keine Abrechnung. Es wird nichts ohne deine ausdrückliche Aktion gesendet. Erfordert einen eigenen API-Schlüssel.</value></data>
+  <data name="LblAIDesc.Text"><value>Rechtsklick auf einen Eintrag auf der Cleaner-Seite → Mit KI erklären. Wähle Groq, OpenAI oder Anthropic. Es wird nichts ohne deine ausdrückliche Aktion gesendet. Erfordert einen eigenen API-Schlüssel.</value></data>
   <data name="LblAICustomHint.Text"><value>💡 Sobald dein Schlüssel gespeichert ist, schaltet die Seite „Eigene Reiniger" ebenfalls KI frei — beschreibe was bereinigt werden soll und sie generiert direkt einen fertigen Winapp2-Eintrag oder ein PowerShell-Skript.</value></data>
   <data name="ResultsHeader.Text"><value>Ergebnisse</value></data>
   <data name="BtnBackToResults.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip"><value>Zurück zu den Ergebnissen</value></data>
@@ -178,10 +178,19 @@
   <data name="LblHistoryDesc.Text"><value>Verfolge, wie viel Junk sich im Laufe der Zeit ansammelt.</value></data>
   <data name="LblCleanHistory.Text"><value>Bereinigungsverlauf</value></data>
   <data name="BtnClearHistory.Content"><value>Verlauf löschen</value></data>
+  <data name="SectionScheduler.Text"><value>Geplante Reinigung</value></data>
+  <data name="LblSchedulerDesc.Text"><value>Führt dieselbe Reinigung wie /AUTO über die Windows-Aufgabenplanung aus. Die Aufgabe läuft nur, während du angemeldet bist, und benötigt keine Administratorrechte.</value></data>
+  <data name="SchedulerEnabled.Header"><value>Geplante Reinigung aktivieren</value></data>
+  <data name="SchedulerFrequency.Header"><value>Häufigkeit</value></data>
+  <data name="SchedulerTime.Header"><value>Uhrzeit</value></data>
+  <data name="SchedulerShutdown.Content"><value>PC danach herunterfahren</value></data>
+  <data name="SchedulerApply.Content"><value>Übernehmen</value></data>
+  <data name="SchedulerOpen.Content"><value>Windows-Aufgabenplanung öffnen</value></data>
   <data name="SectionAI.Text"><value>KI-Erklärungen</value></data>
   <data name="LblAIOptIn.Text"><value>opt-in</value></data>
   <data name="LblAIPreview.Text"><value>Vorschau</value></data>
   <data name="BtnAIDiscussion.Content"><value>Meinung? Zur Diskussion →</value></data>
+  <data name="CboAIProvider.Header"><value>Anbieter</value></data>
   <data name="BtnSaveApiKey.Content"><value>Speichern</value></data>
   <data name="BtnTestApiKey.Content"><value>Testen</value></data>
   <data name="BtnGetApiKey.Content"><value>Schlüssel holen</value></data>
@@ -220,6 +229,17 @@
   <data name="St_MenuCheckUpdates"><value>Auf Updates prüfen</value></data>
   <data name="St_ApiKeyMissing"><value>⚠ Zuerst einen API-Schlüssel eingeben.</value></data>
   <data name="St_ApiKeyTesting"><value>Teste…</value></data>
+  <data name="Scheduler_FreqDaily"><value>Täglich</value></data>
+  <data name="Scheduler_FreqWeekly"><value>Wöchentlich (Montag)</value></data>
+  <data name="Scheduler_FreqLogon"><value>Bei Anmeldung</value></data>
+  <data name="Scheduler_StatusActive"><value>✓ Geplante Aufgabe ist aktiv.</value></data>
+  <data name="Scheduler_StatusInactive"><value>✗ Nicht geplant.</value></data>
+  <data name="Scheduler_Applying"><value>Wird übernommen…</value></data>
+  <data name="Scheduler_ErrorExecutablePath"><value>Der Pfad zur FluentCleaner-Programmdatei konnte nicht ermittelt werden.</value></data>
+  <data name="Scheduler_ResultCreated"><value>Die geplante Aufgabe wurde erstellt.</value></data>
+  <data name="Scheduler_ResultNothingToRemove"><value>Es ist keine geplante Aufgabe zum Entfernen vorhanden.</value></data>
+  <data name="Scheduler_ResultRemoved"><value>Die geplante Aufgabe wurde entfernt.</value></data>
+  <data name="Scheduler_ErrorSchtasks"><value>Die Windows-Aufgabenplanung ist fehlgeschlagen.</value></data>
   <data name="St_ExportSuccess"><value>Einstellungen exportiert nach {0}</value></data>
   <data name="St_ExportFailed"><value>Export fehlgeschlagen: {0}</value></data>
   <data name="St_ImportSuccess"><value>Einstellungen importiert aus {0}</value></data>
@@ -280,10 +300,10 @@
   <!-- ============================================================
        AI EXPLAINER
   ============================================================ -->
-  <data name="AI_NoKey"><value>Kein API-Schlüssel konfiguriert. Gehe zu Einstellungen → KI-Erklärungen, um deinen Groq-API-Schlüssel hinzuzufügen (kostenlos auf console.groq.com).</value></data>
-  <data name="AI_ApiError"><value>Groq-API-Fehler: {0}</value></data>
+  <data name="AI_NoKey"><value>Für den gewählten Anbieter ist kein API-Schlüssel konfiguriert. Gehe zu Einstellungen → KI-Erklärungen, um einen hinzuzufügen.</value></data>
+  <data name="AI_ApiError"><value>{0}-API-Fehler: {1}</value></data>
   <data name="AI_NoResponse"><value>Keine Antwort erhalten.</value></data>
-  <data name="AI_NetworkError"><value>Groq-API nicht erreichbar: {0}</value></data>
+  <data name="AI_NetworkError"><value>{0} nicht erreichbar: {1}</value></data>
   <data name="AI_NoKeyShort"><value>Kein API-Schlüssel konfiguriert — gehe zu Einstellungen → KI-Erklärungen.</value></data>
 
   <!-- ============================================================

@@ -5,14 +5,14 @@ namespace FluentCleaner.Services;
 
 public record CleanHistoryEntry(DateTime Date, long BytesFreed, int ItemsRemoved);
 
+// App-wide settings, persisted as a single settings.json and exposed through the
+// static Instance. The Classic app reads/writes the SAME file; keys it owns
+// (WindowX/WindowY, …) land in Extra and get written back untouched, so a save
+// here never strips them out of the shared file.
 public class AppSettings
 {
-    // single shared instance, loaded from disk at startup.
-    // NOTE: initialized in the static constructor (below), NOT with an inline "= Load()".
-    // Static field initializers run in textual order, and Load() depends on the path fields
-    // (PortablePath/SettingsFile/JsonOptions) declared further down. An inline initializer here
-    // would run BEFORE those fields are set, making SettingsFile null and Load() silently return
-    // empty defaults — which is exactly the bug that made saved settings (language!) never load.
+    // set in the static ctor (below), not "= Load()" here: the load path is built
+    // from the fields further down, which aren't set yet at this point.
     public static AppSettings Instance { get; private set; } = null!;
 
     // Portable mode: if settings.json sits next to the exe, use it instead of %AppData%.
@@ -33,7 +33,6 @@ public class AppSettings
         WriteIndented = true
     };
 
-    // Runs after ALL static field initializers above are set, so Load() sees valid paths.
     static AppSettings() => Instance = Load();
 
     // --- persisted settings -----------------------------------------------
@@ -67,14 +66,29 @@ public class AppSettings
     public bool CleanHistoryEnabled { get; set; } = true;
     public List<CleanHistoryEntry> CleanHistory { get; set; } = [];
 
-    // Groq API key for AI entry explanations; null = not configured
+    // Provider used for explanations and Custom Cleaner generation.
+    public string AiProvider { get; set; } = "Groq";
+
+    // Provider keys stay separate so switching providers never overwrites another key.
     public string? GroqApiKey { get; set; }
+    public string? OpenAiApiKey { get; set; }
+    public string? AnthropicApiKey { get; set; }
+
+    // Modern and Classic use separate task names and schedules.
+    public string ModernSchedulerFrequency { get; set; } = "Daily";
+    public string ModernSchedulerTime { get; set; } = "03:00";
+    public bool ModernSchedulerShutdownAfter { get; set; }
 
     // true once the user dismisses the startup donation tip
     public bool DonationDismissed { get; set; } = false;
 
     // UI language override; "" = follow Windows, "en-US" / "de-DE" = forced
     public string Language { get; set; } = "";
+
+    // Classic writes keys this app doesn't type (WindowX/WindowY). Keep them across
+    // a save instead of dropping them from the shared file.
+    [JsonExtensionData]
+    public Dictionary<string, JsonElement> Extra { get; set; } = [];
 
 
     // -----------------------------------------------------------------------

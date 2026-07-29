@@ -1,8 +1,7 @@
+using CommunityToolkit.Mvvm.Input;
 using FluentCleaner.Services;
 using FluentCleaner.ViewModels;
-using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
-using System.IO;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
@@ -31,7 +30,7 @@ public sealed partial class CleanerPage : Page, ISearchablePage, IPageActions
     }
 
     // OnNavigatedTo fires on every visit, even with NavigationCacheMode="Required".
-    // Loaded only fires once — so this is the right place to pick up new custom entries.
+    // Loaded only fires once, so this is the right place to pick up new custom entries
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
@@ -52,20 +51,20 @@ public sealed partial class CleanerPage : Page, ISearchablePage, IPageActions
             flyout.Items.Add(item);
         }
 
-        Add(ResourceService.Get("St_MenuSelectAll"),      () => ViewModel.SelectAllCommand.Execute(null));
-        Add(ResourceService.Get("St_MenuSelectNone"),     () => ViewModel.SelectNoneCommand.Execute(null));
+        Add(ResourceService.Get("St_MenuSelectAll"), () => ViewModel.SelectAllCommand.Execute(null));
+        Add(ResourceService.Get("St_MenuSelectNone"), () => ViewModel.SelectNoneCommand.Execute(null));
         Add(ResourceService.Get("St_MenuSelectDefaults"), () => ViewModel.SelectDefaultsCommand.Execute(null));
         flyout.Items.Add(new MenuFlyoutSeparator());
-        Add(ResourceService.Get("St_MenuExpandAll"),      () => ViewModel.ExpandAllCommand.Execute(null));
-        Add(ResourceService.Get("St_MenuCollapseAll"),    () => ViewModel.CollapseAllCommand.Execute(null));
+        Add(ResourceService.Get("St_MenuExpandAll"), () => ViewModel.ExpandAllCommand.Execute(null));
+        Add(ResourceService.Get("St_MenuCollapseAll"), () => ViewModel.CollapseAllCommand.Execute(null));
         flyout.Items.Add(new MenuFlyoutSeparator());
-        Add(ResourceService.Get("St_MenuSortDesc"),       () => ViewModel.SortResultsDescCommand.Execute(null));
-        Add(ResourceService.Get("St_MenuSortAsc"),        () => ViewModel.SortResultsAscCommand.Execute(null));
+        Add(ResourceService.Get("St_MenuSortDesc"), () => ViewModel.SortResultsDescCommand.Execute(null));
+        Add(ResourceService.Get("St_MenuSortAsc"), () => ViewModel.SortResultsAscCommand.Execute(null));
         flyout.Items.Add(new MenuFlyoutSeparator());
-        Add(ResourceService.Get("St_MenuRefresh"),        () => ViewModel.RefreshCommand.Execute(null));
+        Add(ResourceService.Get("St_MenuRefresh"), () => ViewModel.RefreshCommand.Execute(null));
     }
 
-    // Open the detail view for the clicked result row
+    //Open the detail view for the clicked result row
     private void ResultsListView_ItemClick(object sender, ItemClickEventArgs e)
     {
         if (e.ClickedItem is ScanResultLine line && line.Result is not null)
@@ -89,7 +88,7 @@ public sealed partial class CleanerPage : Page, ISearchablePage, IPageActions
         if (sender is not MenuFlyoutItem { Tag: string path } || string.IsNullOrWhiteSpace(path)) return;
         if (path.StartsWith("HK", StringComparison.OrdinalIgnoreCase)) return;
 
-        var dir  = Path.GetDirectoryName(path);
+        var dir = Path.GetDirectoryName(path);
         var file = Path.GetFileName(path);
         if (string.IsNullOrEmpty(dir) || string.IsNullOrEmpty(file)) return;
 
@@ -152,20 +151,26 @@ public sealed partial class CleanerPage : Page, ISearchablePage, IPageActions
 
         var dialog = new ContentDialog
         {
-            XamlRoot        = XamlRoot,
-            RequestedTheme  = ActualTheme,
-            CornerRadius    = new CornerRadius(8),
-            Title           = vm.Name,
+            XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
+            CornerRadius = new CornerRadius(8),
+            Title = vm.Name,
             CloseButtonText = ResourceService.Get("DlgExplainClose"),
-            Content         = textBlock
+            Content = textBlock
         };
 
-        // Show the dialog immediately (don't await), then fill in the answer
+        //let show the dialog immediately (dont await),then fill in the answer
         var showTask = dialog.ShowAsync().AsTask();
         textBlock.Text = await AiExplainer.ExplainAsync(vm.Entry);
         await showTask;
     }
 
+    // Show source;opens the raw ini block in the Rule Lab (inspect + dry-run test)
+    private void EntrySource_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not MenuFlyoutItem { Tag: CleanerEntryViewModel vm }) return;
+        new RuleLabWindow(vm.Entry.Name, vm.Entry.RawText, ActualTheme).Activate();
+    }
 
     // Category flyout;same trick with CleanerCategoryViewModel
     private async void CatAnalyze_Click(object sender, RoutedEventArgs e)
@@ -227,14 +232,14 @@ public sealed partial class CleanerPage : Page, ISearchablePage, IPageActions
 
         var dialog = new ContentDialog
         {
-            XamlRoot          = XamlRoot,
-            RequestedTheme    = ActualTheme,
-            CornerRadius      = new CornerRadius(8),
-            Title             = ResourceService.Get("DlgBrowsersTitle"),
+            XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
+            CornerRadius = new CornerRadius(8),
+            Title = ResourceService.Get("DlgBrowsersTitle"),
             PrimaryButtonText = ResourceService.Get("DlgBrowsersContinue"),
-            CloseButtonText   = ResourceService.Get("DlgBrowsersCancel"),
-            DefaultButton     = ContentDialogButton.Close,
-            Content           = ResourceService.Fmt("DlgBrowsersMessage", string.Join(", ", running))
+            CloseButtonText = ResourceService.Get("DlgBrowsersCancel"),
+            DefaultButton = ContentDialogButton.Close,
+            Content = ResourceService.Fmt("DlgBrowsersMessage", string.Join(", ", running))
         };
 
         return await dialog.ShowAsync() == ContentDialogResult.Primary;
@@ -248,13 +253,13 @@ public sealed partial class CleanerPage : Page, ISearchablePage, IPageActions
 
         var dialog = new ContentDialog
         {
-            XamlRoot          = XamlRoot,
-            RequestedTheme    = ActualTheme,
-            CornerRadius      = new CornerRadius(8),
-            Title             = ResourceService.Get("DlgWarningTitle"),
+            XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
+            CornerRadius = new CornerRadius(8),
+            Title = ResourceService.Get("DlgWarningTitle"),
             PrimaryButtonText = ResourceService.Get("DlgWarningContinue"),
-            CloseButtonText   = ResourceService.Get("DlgWarningCancel"),
-            DefaultButton     = ContentDialogButton.Close,
+            CloseButtonText = ResourceService.Get("DlgWarningCancel"),
+            DefaultButton = ContentDialogButton.Close,
             Content = new ScrollViewer
             {
                 MaxHeight = 360,
@@ -273,13 +278,16 @@ public sealed partial class CleanerPage : Page, ISearchablePage, IPageActions
     }
 
     // Show/hide the [...] button when hovering over a category header or entry row.
-    // the buttons sit at Opacity="0" 
+    // the buttons sit at Opacity="0"
     private void CatHeader_PointerEntered(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e) =>
         SetMenuButtonOpacity(sender, 1);
+
     private void CatHeader_PointerExited(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e) =>
         SetMenuButtonOpacity(sender, 0);
+
     private void EntryRow_PointerEntered(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e) =>
         SetMenuButtonOpacity(sender, 1);
+
     private void EntryRow_PointerExited(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e) =>
         SetMenuButtonOpacity(sender, 0);
 

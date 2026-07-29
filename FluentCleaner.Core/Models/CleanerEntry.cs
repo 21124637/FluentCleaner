@@ -3,6 +3,7 @@ namespace FluentCleaner.Models;
 /* Represents one application entry parsed from Winapp2.ini.
    Holds everything needed to detect whether the app is installed
    and to describe what files and registry keys should be cleaned. */
+
 public class CleanerEntry
 {
     public string Name { get; set; } = "";                          // Display name shown in the UI (e.g. "Microsoft Edge").
@@ -19,4 +20,6 @@ public class CleanerEntry
 
     // Not from Winapp2.ini; used internally by FluentCleaner:
     public bool IsCustom { get; set; }                             // True for entries loaded from the user's Custom/ folder.
+
+    public string RawText { get; set; } = "";                      // Verbatim ini block for the "Show source" view.
 }

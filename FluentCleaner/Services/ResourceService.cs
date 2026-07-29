@@ -4,14 +4,14 @@ namespace FluentCleaner.Services;
 
 //Localized string lookup for code-side strings (status messages, dialogs).
 //XAML uses x:Uid directly
-//New language: drop a Strings\{lang}\Resources.resw folder and rebuild.
+//New language: drop a Strings\{lang}\Resources.resw folder and rebuild
 public static class ResourceService
 {
     private static ResourceLoader? _loader;
 
     private static ResourceLoader Loader => _loader ??= new ResourceLoader();
 
-    // Scans Strings\{lang}\ folders next to the exe for installed languages.
+    //Scans Strings\{lang}\ folders next to the exe for installed languages
     public static IReadOnlyList<string> GetAvailableLanguages()
     {
         var result = new List<string>();
@@ -25,7 +25,7 @@ public static class ResourceService
         return result;
     }
 
-    //null / "" = follow Windows display language.
+    //null / "" = follow Windows display language
     public static void SetLanguage(string? lang)
     {
         try
@@ -37,7 +37,7 @@ public static class ResourceService
         _loader = null;  //force a fresh loader so lookups pick up the new language
     }
 
-    // Returns the key itself as fallback when a string is missing.
+    // Returns the key itself as fallback when a string is missing
     public static string Get(string key)
     {
         try
@@ -49,7 +49,7 @@ public static class ResourceService
         catch { return key; }
     }
 
-    // Format-string lookup; used for interpolated status messages.
+    //Format-string lookup; used for interpolated status messages.
     // e.g. ResourceService.Fmt("St_ScanComplete", files, reg, size)
     public static string Fmt(string key, params object[] args)
     {

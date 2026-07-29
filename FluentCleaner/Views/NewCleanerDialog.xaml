@@ -35,9 +35,12 @@
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="contentLabel" VerticalAlignment="Center"
                        Style="{StaticResource BodyStrongTextBlockStyle}" />
-            <HyperlinkButton x:Uid="DlgNewCleanerLoadTemplate"
-                             Grid.Column="1"
-                             Padding="0" Click="TemplateBtn_Click" />
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="12">
+                <!-- Test:dry-run the draft in Rule Lab, no save needed;ini only -->
+                <HyperlinkButton x:Name="testBtn" Padding="0" Click="TestBtn_Click" />
+                <HyperlinkButton x:Uid="DlgNewCleanerLoadTemplate"
+                                 Padding="0" Click="TemplateBtn_Click" />
+            </StackPanel>
         </Grid>
 
         <!-- Content editor -->

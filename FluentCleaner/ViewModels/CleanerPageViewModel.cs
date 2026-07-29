@@ -667,6 +667,8 @@ public partial class CleanerPageViewModel : ObservableObject
     {
         var list = lines.ToList();
         if (list.Count == 0) return;
+        //header wants a capital;the raw suffix is lowercase for the "3988 files" line
+        if (title.Length > 0) title = char.ToUpper(title[0]) + title[1..];
         DetailLines.Add(new DetailLine($"{title} ({list.Count})", IsHeader: true));
         foreach (var line in list)
             DetailLines.Add(new DetailLine(line, IsHeader: false));

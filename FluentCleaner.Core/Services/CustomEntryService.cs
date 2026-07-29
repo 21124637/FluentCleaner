@@ -4,7 +4,7 @@ namespace FluentCleaner.Services;
 
 // Owns the Custom/ folder.
 // CustomPage uses CustomDir to manage files; CleanerPageViewModel calls LoadEnabledEntriesAsync()
-// to pull active entries into the cleaner 
+// to pull active entries into the cleaner
 public class CustomEntryService
 {
     public static readonly string CustomDir =

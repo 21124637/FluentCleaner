@@ -416,3 +416,12 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Classic source remains private.
+# Only runtime translations are published.
+/FluentCleaner.Classic/*
+!/FluentCleaner.Classic/Localization/
+!/FluentCleaner.Classic/Localization/*.json
+!/FluentCleaner.Classic/TRANSLATING_CLASSIC.md
+
+/desktop.ini

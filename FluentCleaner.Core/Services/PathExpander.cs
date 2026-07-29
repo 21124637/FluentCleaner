@@ -3,6 +3,7 @@ namespace FluentCleaner.Services;
 /* Handles the two jobs that make FileKey paths tricky:
 1. Expand %EnvVar% tokens (winapp2 uses its own subset, not all Windows vars)
 2. Walk directory trees where path segments contain * wildcards */
+
 public class PathExpander
 {
     private readonly Dictionary<string, string> _vars = BuildVarMap();
@@ -17,35 +18,35 @@ public class PathExpander
                 map[$"%{name}%"] = value.TrimEnd('\\', '/');
         }
 
-        Add("AppData",           Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-        Add("LocalAppData",      Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
-        Add("LocalLowAppData",   Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "..", "LocalLow"));
-        Add("ProgramFiles",      Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+        Add("AppData", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+        Add("LocalAppData", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+        Add("LocalLowAppData", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "..", "LocalLow"));
+        Add("ProgramFiles", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
         Add("ProgramFiles(x86)", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86));
-        Add("ProgramFilesX86",   Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86)); // Winapp2 alias (no parentheses)
-        Add("ProgramData",       Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData));
-        Add("CommonAppData",     Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData));
-        Add("UserProfile",       Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
-        Add("Documents",         Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
-        Add("Desktop",           Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
-        Add("Music",             Environment.GetFolderPath(Environment.SpecialFolder.MyMusic));
-        Add("Pictures",          Environment.GetFolderPath(Environment.SpecialFolder.MyPictures));
-        Add("Videos",            Environment.GetFolderPath(Environment.SpecialFolder.MyVideos));
-        Add("SystemRoot",        Environment.GetFolderPath(Environment.SpecialFolder.Windows));
-        Add("WinDir",            Environment.GetFolderPath(Environment.SpecialFolder.Windows));
-        Add("System",            Environment.GetFolderPath(Environment.SpecialFolder.System));
-        Add("SystemX86",         Environment.GetFolderPath(Environment.SpecialFolder.SystemX86));
-        Add("Temp",              Path.GetTempPath().TrimEnd('\\', '/'));
-        Add("Tmp",               Path.GetTempPath().TrimEnd('\\', '/'));
-        Add("SystemDrive",       Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.Windows))?.TrimEnd('\\') ?? "C:");
+        Add("ProgramFilesX86", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86)); // Winapp2 alias (no parentheses)
+        Add("ProgramData", Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData));
+        Add("CommonAppData", Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData));
+        Add("UserProfile", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+        Add("Documents", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+        Add("Desktop", Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
+        Add("Music", Environment.GetFolderPath(Environment.SpecialFolder.MyMusic));
+        Add("Pictures", Environment.GetFolderPath(Environment.SpecialFolder.MyPictures));
+        Add("Videos", Environment.GetFolderPath(Environment.SpecialFolder.MyVideos));
+        Add("SystemRoot", Environment.GetFolderPath(Environment.SpecialFolder.Windows));
+        Add("WinDir", Environment.GetFolderPath(Environment.SpecialFolder.Windows));
+        Add("System", Environment.GetFolderPath(Environment.SpecialFolder.System));
+        Add("SystemX86", Environment.GetFolderPath(Environment.SpecialFolder.SystemX86));
+        Add("Temp", Path.GetTempPath().TrimEnd('\\', '/'));
+        Add("Tmp", Path.GetTempPath().TrimEnd('\\', '/'));
+        Add("SystemDrive", Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.Windows))?.TrimEnd('\\') ?? "C:");
 
         return map;
     }
 
     public string ExpandVariables(string path)
     {
-        foreach (var (token, value) in _vars)
-            path = path.Replace(token, value, StringComparison.OrdinalIgnoreCase);
+        foreach (var pair in _vars)
+            path = ReplaceIgnoreCase(path, pair.Key, pair.Value);
 
         // Let the OS handle any remaining %VAR% tokens we don't know about
         path = Environment.ExpandEnvironmentVariables(path);
@@ -76,13 +77,29 @@ public class PathExpander
 
         // If the path references %ProgramFiles%, also try %ProgramFiles(x86)%.
         // HashSet prevents duplicates when both point to the same dir (32-bit OS).
-        if (rawPath.Contains("%ProgramFiles%", StringComparison.OrdinalIgnoreCase))
+        if (rawPath.IndexOf("%ProgramFiles%", StringComparison.OrdinalIgnoreCase) >= 0)
         {
-            var x86Path = rawPath.Replace("%ProgramFiles%", "%ProgramFiles(x86)%",
-                                          StringComparison.OrdinalIgnoreCase);
+            var x86Path = ReplaceIgnoreCase(rawPath, "%ProgramFiles%", "%ProgramFiles(x86)%");
             ResolveRecursive(ExpandVariables(x86Path), results);
         }
         return results.ToList();
+    }
+
+    // net48/netstandard2.0 have no case-insensitive string.Replace overload;
+    // this is just the manual IndexOf-and-splice version of that
+    private static string ReplaceIgnoreCase(string source, string oldValue, string newValue)
+    {
+        var sb = new System.Text.StringBuilder();
+        int pos = 0;
+        while (true)
+        {
+            int idx = source.IndexOf(oldValue, pos, StringComparison.OrdinalIgnoreCase);
+            if (idx < 0) { sb.Append(source, pos, source.Length - pos); break; }
+            sb.Append(source, pos, idx - pos);
+            sb.Append(newValue);
+            pos = idx + oldValue.Length;
+        }
+        return sb.ToString();
     }
 
     private static void ResolveRecursive(string path, HashSet<string> results)
@@ -101,12 +118,12 @@ public class PathExpander
 
         var basePath = wcIdx == 0
             ? Path.GetPathRoot(path) ?? ""
-            : string.Join('\\', parts[..wcIdx]);
+            : string.Join("\\", parts.Take(wcIdx));
 
         if (!Directory.Exists(basePath)) return;
 
-        var wildcard  = parts[wcIdx];
-        var remaining = parts[(wcIdx + 1)..];
+        var wildcard = parts[wcIdx];
+        var remaining = parts.Skip(wcIdx + 1).ToArray();
 
         try
         {
@@ -120,7 +137,7 @@ public class PathExpander
                 if (remaining.Length == 0)
                     results.Add(match);
                 else
-                    ResolveRecursive(Path.Combine(match, string.Join('\\', remaining)), results);
+                    ResolveRecursive(Path.Combine(match, string.Join("\\", remaining)), results);
             }
         }
         catch (UnauthorizedAccessException) { }

@@ -263,6 +263,7 @@
   <data name="DlgNewCleanerNamePlaceholder"><value>Mio Pulitore</value></data>
   <data name="DlgNewCleanerAiPlaceholder"><value>Genera con l'IA: descrivi cosa pulire (i risultati possono variare)</value></data>
   <data name="DlgNewCleanerGenerate.Content"><value>Genera</value></data>
+  <data name="DlgNewCleanerGenerateBtn"><value>Genera</value></data>
   <data name="DlgNewCleanerContentLabel"><value>Contenuto</value></data>
   <data name="DlgNewCleanerLoadTemplate.Content"><value>Carica modello</value></data>
   <data name="DlgNewCleanerTitleNew"><value>Nuovo pulitore personalizzato</value></data>

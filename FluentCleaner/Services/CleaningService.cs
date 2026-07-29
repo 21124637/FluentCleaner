@@ -28,7 +28,7 @@ public class CleaningService
        inflate the reported size for no reason. */
     private ScanResult Analyze(CleanerEntry entry, IProgress<string>? progress, CancellationToken token = default)
     {
-        var result   = new ScanResult { Entry = entry };
+        var result = new ScanResult { Entry = entry };
         var excluded = BuildExclusions(entry);
 
         // Wrap the caller's progress so every path report is prefixed with the entry name.
@@ -38,13 +38,17 @@ public class CleaningService
         IProgress<string>? entryProgress = progress is null ? null
             : new PrefixedProgress(entry.Name, progress);
 
+        // dedup across FileKeys via a set;List.Contains would crawl on big entries
+        // (Firefox Caches alone is ~8600 files)
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
         foreach (var fileKey in entry.FileKeys)
         {
             try
             {
                 foreach (var file in FindFiles(fileKey, excluded, entryProgress, token))
                 {
-                    if (result.FilesToDelete.Contains(file)) continue;
+                    if (!seen.Add(file)) continue;
 
                     // Skip files that are truly inaccessible (hard lock / no permissions).
                     var size = TryGetDeletableSize(file);
@@ -82,7 +86,7 @@ public class CleaningService
             progress?.Report(dir);
 
             foreach (var f in EnumerateFilesSafe(dir, patterns, recurse, progress, token))
-                if (!IsExcluded(f, excluded))
+                if (!IsExcluded(f, excluded) && !IsProtected(f))
                     yield return f;
         }
     }
@@ -111,8 +115,10 @@ public class CleaningService
         //C:\Users\All Users >> C:\ProgramData >>> All Users >>...forever ;)
         //Real content is always reachable via the canonical path;no need to follow aliases
         try
-        { dirs = Directory.EnumerateDirectories(root)
-                              .Where(d => (File.GetAttributes(d) & FileAttributes.ReparsePoint) == 0); }
+        {
+            dirs = Directory.EnumerateDirectories(root)
+                              .Where(d => (File.GetAttributes(d) & FileAttributes.ReparsePoint) == 0);
+        }
         catch { yield break; }
 
         foreach (var sub in dirs)
@@ -128,7 +134,7 @@ public class CleaningService
     private static IEnumerable<RegistryItemToDelete> FindRegistryItems(RegKeyEntry regKey)
     {
         var (hive, subKey) = SplitHiveSubKey(regKey.KeyPath);
-        using var root = OpenHive(hive);
+        using var root = RegistryHelpers.OpenHive(hive);
         if (root is null) yield break;
 
         using var key = root.OpenSubKey(subKey, writable: false);
@@ -154,7 +160,7 @@ public class CleaningService
      Also returns the count of successfully deleted items and the total bytes freed.*/
     private (int count, long bytes) Clean(ScanResult result, IProgress<string>? progress, CancellationToken token = default)
     {
-        int  count = 0;
+        int count = 0;
         long bytes = 0;
 
         foreach (var file in result.FilesToDelete)
@@ -195,7 +201,7 @@ public class CleaningService
     private static void DeleteRegistryItem(RegistryItemToDelete item)
     {
         var (hive, subKey) = SplitHiveSubKey(item.KeyPath);
-        using var root = OpenHive(hive);
+        using var root = RegistryHelpers.OpenHive(hive);
         if (root is null) return;
 
         if (item.ValueName is not null)
@@ -206,7 +212,7 @@ public class CleaningService
         else
         {
             var parentSubKey = Path.GetDirectoryName(subKey)?.Replace('/', '\\') ?? "";
-            var keyName      = Path.GetFileName(subKey);
+            var keyName = Path.GetFileName(subKey);
             using var parent = root.OpenSubKey(parentSubKey, writable: true);
             parent?.DeleteSubKeyTree(keyName, throwOnMissingSubKey: false); // delete the whole key tree; if it's already gone, skip silently
         }
@@ -238,7 +244,7 @@ public class CleaningService
 
     /* Turns the entry's ExcludeKey lines into rules we can actually match against during the scan.
        REG exclusions are skipped here;they don't apply to file paths anyway.
-       Global exclusions from Settings are layered on top — they override everything. */
+       Global exclusions from Settings are layered on top,they override everything. */
     private List<ExclusionRule> BuildExclusions(CleanerEntry entry)
     {
         var rules = new List<ExclusionRule>();
@@ -291,23 +297,29 @@ public class CleaningService
         return false;
     }
 
+    /* Built-in safety net;paths we never delete no matter what the database says.
+       These hold data that breaks apps when wiped, so a broad REMOVESELF rule
+       shouldn't be able to touch them. Add a line to protect more. */
+    private static readonly string[] ProtectedSegments =
+    {
+        // browser extension databases (1Password, Bitwarden, uBlock filter lists…);
+        // normal site storage ("https_...") stays cleanable, only "chrome-extension_" is off-limits
+        @"\IndexedDB\chrome-extension_",
+    };
+
+    // Same list, read-only;lets the Settings page show users exactly what's protected
+    public static IReadOnlyList<string> ProtectedPaths => ProtectedSegments;
+
+    // True when the path sits under one of the protected segments
+    private static bool IsProtected(string path) =>
+        ProtectedSegments.Any(s => path.Contains(s, StringComparison.OrdinalIgnoreCase));
+
     // Splits "HKCU\Software\Foo" into ("HKCU", "Software\Foo").
     private static (string hive, string subKey) SplitHiveSubKey(string path)
     {
         var idx = path.IndexOf('\\');
         return idx < 0 ? (path.ToUpperInvariant(), "") : (path[..idx].ToUpperInvariant(), path[(idx + 1)..]);
     }
-
-    // Shared with DetectionService; maps hive abbreviations to registry root keys. Yeah, a shared RegistryHelper would be cleaner, but im too lazy here
-    internal static RegistryKey? OpenHive(string hive) => hive switch
-    {
-        "HKCU" or "HKEY_CURRENT_USER"   => Registry.CurrentUser,
-        "HKLM" or "HKEY_LOCAL_MACHINE"  => Registry.LocalMachine,
-        "HKU"  or "HKEY_USERS"          => Registry.Users,
-        "HKCC" or "HKEY_CURRENT_CONFIG" => Registry.CurrentConfig,
-        "HKCR" or "HKEY_CLASSES_ROOT"   => Registry.ClassesRoot,
-        _ => null
-    };
 
     // --- Nested Types ---------------------------------------------
 

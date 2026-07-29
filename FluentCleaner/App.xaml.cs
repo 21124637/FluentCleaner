@@ -26,9 +26,26 @@ public partial class App : Application
 
         UnhandledException += (_, e) =>
         {
-            e.Handled = true; // prevent silent 0xC000027B process termination
-            System.Diagnostics.Debug.WriteLine($"[UnhandledException] {e.Exception}");
+            e.Handled = true; //stop the app from dying silently(0xC000027B)
+            LogCrash(e.Exception);
         };
+    }
+
+    //when the app blows up, dump it to crash.log so users can send it over.
+    //lives next to auto.log: %AppData%\FluentCleaner\crash.log
+    private static void LogCrash(Exception ex)
+    {
+        try
+        {
+            var path = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "FluentCleaner", "crash.log");
+
+            Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+            File.AppendAllText(path,
+                $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}]\n{ex}\n{new string('-', 60)}\n\n");
+        }
+        catch { /* logging must never be the thing that crashes us */ }
     }
 
     //Entry point;load settings, build the window, wire everything up.

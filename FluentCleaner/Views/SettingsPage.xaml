@@ -440,6 +440,9 @@
                              Padding="12"
                              PlaceholderText="PATH|%LocalAppData%\Microsoft\Edge*\User Data\*\Service Worker&#x0a;PATH|%LocalAppData%\Microsoft\Edge*\User Data\*\IndexedDB&#x0a;FILE|%AppData%\Mozilla\Firefox\Profiles\|places.sqlite" />
                 </Border>
+
+                <!-- Built-in protected paths;always skipped, read-only, just so the user can see them -->
+                <HyperlinkButton x:Uid="LnkProtectedPaths" Padding="0" Click="ProtectedPaths_Click" />
             </StackPanel>
             <!-- End global exclusions -->
 
@@ -514,7 +517,75 @@
                     </StackPanel>
                 </Expander>
             </StackPanel>
-            
+
+            <!-- Scheduled cleaning -->
+            <StackPanel Spacing="8">
+                <StackPanel Spacing="2">
+                    <TextBlock x:Uid="SectionScheduler" FontSize="13" FontWeight="SemiBold" />
+                    <TextBlock x:Uid="LblSchedulerDesc"
+                               TextWrapping="Wrap"
+                               FontSize="12"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                </StackPanel>
+
+                <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1" CornerRadius="8" Padding="18,14">
+                    <StackPanel Spacing="12">
+                        <Grid ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ToggleSwitch x:Name="SchedulerEnabledToggle"
+                                          x:Uid="SchedulerEnabled"
+                                          OnContent="" OffContent=""
+                                          Toggled="SchedulerEnabled_Toggled" />
+                            <TextBlock x:Name="SchedulerStatusText"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="12"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        </Grid>
+
+                        <Grid ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="180" />
+                                <ColumnDefinition Width="160" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ComboBox x:Name="SchedulerFrequencyBox"
+                                      x:Uid="SchedulerFrequency"
+                                      SelectionChanged="SchedulerFrequency_SelectionChanged" />
+                            <TimePicker x:Name="SchedulerTimePicker"
+                                        x:Uid="SchedulerTime"
+                                        Grid.Column="1"
+                                        ClockIdentifier="24HourClock" />
+                            <CheckBox x:Name="SchedulerShutdownCheck"
+                                      x:Uid="SchedulerShutdown"
+                                      Grid.Column="2"
+                                      VerticalAlignment="Bottom"
+                                      Margin="0,0,0,7" />
+                        </Grid>
+
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button x:Name="SchedulerApplyButton"
+                                    x:Uid="SchedulerApply"
+                                    Style="{StaticResource AccentButtonStyle}"
+                                    Click="SchedulerApply_Click" />
+                            <HyperlinkButton x:Uid="SchedulerOpen"
+                                             Padding="0"
+                                             Click="SchedulerOpen_Click" />
+                        </StackPanel>
+
+                        <TextBlock x:Name="SchedulerResultText"
+                                   TextWrapping="Wrap"
+                                   FontSize="12"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
                 <!-- AI explanations -->
                 <StackPanel Spacing="8">
                     <StackPanel Spacing="6">
@@ -545,29 +616,40 @@
                     <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         BorderThickness="1" CornerRadius="8" Padding="18,14">
-                        <Grid ColumnSpacing="12">
+                        <Grid ColumnSpacing="12" RowSpacing="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
 
-                            <Border Grid.Column="0" Width="36" Height="36" CornerRadius="6"
+                            <Border Grid.RowSpan="2" Grid.Column="0" Width="36" Height="36" CornerRadius="6"
                                 Background="{ThemeResource SubtleFillColorSecondaryBrush}"
                                 VerticalAlignment="Center">
                                 <FontIcon Glyph="&#xE899;" FontSize="18"
                                       Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
                             </Border>
 
-                            <PasswordBox Grid.Column="1"
+                            <ComboBox x:Name="AiProviderBox"
+                                      x:Uid="CboAIProvider"
+                                      Grid.Row="0" Grid.Column="1"
+                                      Width="160"
+                                      HorizontalAlignment="Left"
+                                      SelectionChanged="AiProvider_SelectionChanged" />
+
+                            <PasswordBox Grid.Row="1" Grid.Column="1"
                                      x:Name="ApiKeyBox"
                                      PlaceholderText="gsk_..."
                                      FontFamily="Consolas"
                                      FontSize="12"
                                      VerticalAlignment="Center" />
 
-                            <StackPanel Grid.Column="2" Orientation="Horizontal"
+                            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal"
                                         Spacing="6" VerticalAlignment="Center">
                                 <Button x:Uid="BtnSaveApiKey"
                                         Style="{StaticResource AccentButtonStyle}"
@@ -576,8 +658,9 @@
                                         Click="ApiKeyTest_Click" />
                             </StackPanel>
 
-                            <HyperlinkButton x:Uid="BtnGetApiKey"
-                                         Grid.Column="3"
+                            <HyperlinkButton x:Name="btnGetApiKey"
+                                         x:Uid="BtnGetApiKey"
+                                         Grid.Row="1" Grid.Column="3"
                                          NavigateUri="https://console.groq.com/keys"
                                          VerticalAlignment="Center" />
                         </Grid>

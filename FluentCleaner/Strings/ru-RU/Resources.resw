@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
   <resheader name="version"><value>2.0</value></resheader>
@@ -259,6 +259,7 @@
   <data name="DlgNewCleanerNamePlaceholder"><value>Мой очиститель</value></data>
   <data name="DlgNewCleanerAiPlaceholder"><value>Сгенерировать с ИИ — опишите, что нужно очистить (результаты могут различаться)</value></data>
   <data name="DlgNewCleanerGenerate.Content"><value>Сгенерировать</value></data>
+  <data name="DlgNewCleanerGenerateBtn"><value>Сгенерировать</value></data>
   <data name="DlgNewCleanerContentLabel"><value>Содержимое</value></data>
   <data name="DlgNewCleanerLoadTemplate.Content"><value>Загрузить шаблон</value></data>
   <data name="DlgNewCleanerTitleNew"><value>Новый пользовательский очиститель</value></data>

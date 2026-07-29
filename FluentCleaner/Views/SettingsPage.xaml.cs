@@ -13,6 +13,10 @@ public sealed partial class SettingsPage : Page, IPageActions
     private static readonly HttpClient _http = new();
     private string? _updateVersion; // null = up to date, string = new version available
     private bool _pageReady; // true when the page has finished loading and is ready to handle events
+    private string _groqKey = "";
+    private string _openAiKey = "";
+    private string _anthropicKey = "";
+    private string _currentProvider = "Groq";
 
     public SettingsPageViewModel ViewModel { get; } = new();
     public string AppVersion => AppInfo.DisplayVersion;
@@ -21,12 +25,14 @@ public sealed partial class SettingsPage : Page, IPageActions
     public SettingsPage()
     {
         InitializeComponent();
+        AiProviderBox.ItemsSource = new[] { "Groq", "OpenAI", "Anthropic" };
         Loaded += async (_, _) =>
         {
             _pageReady = false;
             ViewModel.Refresh();                                    //sync database toggles, paths, theme
             await CheckForUpdateAsync(silent: true);               //silent update check; banner only if newer version found
-            ApiKeyBox.Password = AppSettings.Instance.GroqApiKey ?? ""; //pre-fill saved Groq key (masked)
+            LoadAiSettings();
+            await LoadSchedulerSettingsAsync();
 
             // Translator credit: hidden when the language file leaves it empty.
             var credit = ResourceService.Get("LblTranslatorCredit");
@@ -125,15 +131,173 @@ public sealed partial class SettingsPage : Page, IPageActions
     private async void Link_Faq(object sender, RoutedEventArgs e)        => await AppLinks.OpenAsync(AppLinks.Faq);
     private async void Link_IconCredit(object sender, RoutedEventArgs e) => await AppLinks.OpenAsync(AppLinks.IconCredit);
 
-    // saves trimmed key; null when the box is empty
-    private void ApiKeySave_Click(object sender, RoutedEventArgs e)
+    private async Task LoadSchedulerSettingsAsync()
     {
-        AppSettings.Instance.GroqApiKey =
-            string.IsNullOrWhiteSpace(ApiKeyBox.Password) ? null : ApiKeyBox.Password.Trim();
+        SchedulerFrequencyBox.ItemsSource = new[]
+        {
+            ResourceService.Get("Scheduler_FreqDaily"),
+            ResourceService.Get("Scheduler_FreqWeekly"),
+            ResourceService.Get("Scheduler_FreqLogon"),
+        };
+
+        var settings = AppSettings.Instance;
+        SchedulerFrequencyBox.SelectedIndex = settings.ModernSchedulerFrequency switch
+        {
+            "Weekly" => 1,
+            "Logon"  => 2,
+            _        => 0,
+        };
+
+        SchedulerTimePicker.Time = TimeSpan.TryParse(settings.ModernSchedulerTime, out var time)
+            ? time
+            : new TimeSpan(3, 0, 0);
+        SchedulerShutdownCheck.IsChecked = settings.ModernSchedulerShutdownAfter;
+
+        var exists = await Task.Run(TaskSchedulerService.Exists);
+        SchedulerEnabledToggle.IsOn = exists;
+        SetSchedulerStatus(exists);
+        SchedulerResultText.Text = "";
+        UpdateSchedulerControls();
+    }
+
+    private void SchedulerEnabled_Toggled(object sender, RoutedEventArgs e)
+    {
+        if (_pageReady)
+            UpdateSchedulerControls();
+    }
+
+    private void SchedulerFrequency_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (_pageReady)
+            UpdateSchedulerControls();
+    }
+
+    private void UpdateSchedulerControls()
+    {
+        var enabled = SchedulerEnabledToggle.IsOn;
+        SchedulerFrequencyBox.IsEnabled = enabled;
+        SchedulerTimePicker.IsEnabled = enabled && SchedulerFrequencyBox.SelectedIndex != 2;
+        SchedulerShutdownCheck.IsEnabled = enabled;
+    }
+
+    private void SaveSchedulerSettings()
+    {
+        var settings = AppSettings.Instance;
+        settings.ModernSchedulerFrequency = SchedulerFrequencyBox.SelectedIndex switch
+        {
+            1 => "Weekly",
+            2 => "Logon",
+            _ => "Daily",
+        };
+        settings.ModernSchedulerTime = SchedulerTimePicker.Time.ToString(@"hh\:mm");
+        settings.ModernSchedulerShutdownAfter = SchedulerShutdownCheck.IsChecked == true;
+        settings.Save();
+    }
+
+    private void SetSchedulerStatus(bool active) =>
+        SchedulerStatusText.Text = ResourceService.Get(
+            active ? "Scheduler_StatusActive" : "Scheduler_StatusInactive");
+
+    private async void SchedulerApply_Click(object sender, RoutedEventArgs e)
+    {
+        SaveSchedulerSettings();
+        SchedulerApplyButton.IsEnabled = false;
+        SchedulerResultText.Text = ResourceService.Get("Scheduler_Applying");
+
+        (bool Ok, string Message) result;
+        if (!SchedulerEnabledToggle.IsOn)
+        {
+            result = await Task.Run(TaskSchedulerService.Delete);
+        }
+        else
+        {
+            var frequency = SchedulerFrequencyBox.SelectedIndex switch
+            {
+                1 => SchedulerFrequency.Weekly,
+                2 => SchedulerFrequency.Logon,
+                _ => SchedulerFrequency.Daily,
+            };
+            var scheduledTime = SchedulerTimePicker.Time;
+            var shutdownAfter = SchedulerShutdownCheck.IsChecked == true;
+            result = await Task.Run(() => TaskSchedulerService.CreateOrUpdate(
+                frequency,
+                scheduledTime,
+                shutdownAfter));
+        }
+
+        SchedulerResultText.Text = $"{(result.Ok ? "✓" : "✗")} {result.Message}";
+        SetSchedulerStatus(await Task.Run(TaskSchedulerService.Exists));
+        SchedulerApplyButton.IsEnabled = true;
+    }
+
+    private void SchedulerOpen_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo("taskschd.msc") { UseShellExecute = true });
+        }
+        catch { }
+    }
+
+    private void LoadAiSettings()
+    {
+        _groqKey = AppSettings.Instance.GroqApiKey ?? "";
+        _openAiKey = AppSettings.Instance.OpenAiApiKey ?? "";
+        _anthropicKey = AppSettings.Instance.AnthropicApiKey ?? "";
+        _currentProvider = AppSettings.Instance.AiProvider is "OpenAI" or "Anthropic"
+            ? AppSettings.Instance.AiProvider : "Groq";
+
+        AiProviderBox.SelectedItem = _currentProvider;
+        ApplyProviderToUi();
+    }
+
+    private void AiProvider_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!_pageReady) return;
+
+        StashCurrentKey();
+        _currentProvider = AiProviderBox.SelectedItem as string ?? "Groq";
+        ApplyProviderToUi();
+
+        AppSettings.Instance.AiProvider = _currentProvider;
         AppSettings.Instance.Save();
     }
 
-    // quick sanity-check
+    private void StashCurrentKey()
+    {
+        switch (_currentProvider)
+        {
+            case "OpenAI": _openAiKey = ApiKeyBox.Password.Trim(); break;
+            case "Anthropic": _anthropicKey = ApiKeyBox.Password.Trim(); break;
+            default: _groqKey = ApiKeyBox.Password.Trim(); break;
+        }
+    }
+
+    private void ApplyProviderToUi()
+    {
+        (ApiKeyBox.Password, ApiKeyBox.PlaceholderText, btnGetApiKey.NavigateUri) = _currentProvider switch
+        {
+            "OpenAI"    => (_openAiKey, "sk-...", new Uri("https://platform.openai.com/api-keys")),
+            "Anthropic" => (_anthropicKey, "sk-ant-...", new Uri("https://console.anthropic.com/settings/keys")),
+            _           => (_groqKey, "gsk_...", new Uri("https://console.groq.com/keys")),
+        };
+
+        lblApiTestResult.Text = "";
+        lblApiTestResult.Visibility = Visibility.Collapsed;
+    }
+
+    // Saves every provider key so switching providers never drops an edit.
+    private void ApiKeySave_Click(object sender, RoutedEventArgs e)
+    {
+        StashCurrentKey();
+        AppSettings.Instance.AiProvider = _currentProvider;
+        AppSettings.Instance.GroqApiKey = _groqKey.Length == 0 ? null : _groqKey;
+        AppSettings.Instance.OpenAiApiKey = _openAiKey.Length == 0 ? null : _openAiKey;
+        AppSettings.Instance.AnthropicApiKey = _anthropicKey.Length == 0 ? null : _anthropicKey;
+        AppSettings.Instance.Save();
+    }
+
+    // Sends one short request instead of accepting a key based on its prefix.
     private async void ApiKeyTest_Click(object sender, RoutedEventArgs e)
     {
         var key = ApiKeyBox.Password.Trim();
@@ -142,7 +306,7 @@ public sealed partial class SettingsPage : Page, IPageActions
         btnTestKey.IsEnabled        = false;
         lblApiTestResult.Text       = ResourceService.Get("St_ApiKeyTesting");
         lblApiTestResult.Visibility = Visibility.Visible;
-        lblApiTestResult.Text       = await AiExplainer.TestKeyAsync(key);
+        lblApiTestResult.Text       = await AiExplainer.TestKeyAsync(key, _currentProvider);
         btnTestKey.IsEnabled        = true;
     }
 
@@ -157,6 +321,38 @@ public sealed partial class SettingsPage : Page, IPageActions
         var file = await picker.PickSingleFileAsync();
         if (file is not null)
             ViewModel.CustomPath = file.Path;
+    }
+
+    // Shows the built-in protected paths read-only;these are always skipped, no matter what the database says
+    private async void ProtectedPaths_Click(object sender, RoutedEventArgs e)
+    {
+        var list = new TextBox
+        {
+            Text            = string.Join("\n", CleaningService.ProtectedPaths),
+            IsReadOnly      = true,
+            FontFamily      = new Microsoft.UI.Xaml.Media.FontFamily("Consolas"),
+            FontSize        = 12,
+            TextWrapping    = TextWrapping.NoWrap,
+            AcceptsReturn   = true,
+            BorderThickness = new Thickness(0)
+        };
+
+        await new ContentDialog
+        {
+            XamlRoot        = XamlRoot,
+            RequestedTheme  = ActualTheme,
+            Title           = ResourceService.Get("DlgProtectedTitle"),
+            Content         = new StackPanel
+            {
+                Spacing  = 10,
+                Children =
+                {
+                    new TextBlock { Text = ResourceService.Get("DlgProtectedDesc"), TextWrapping = TextWrapping.Wrap },
+                    list
+                }
+            },
+            CloseButtonText = ResourceService.Get("DlgExplainClose")
+        }.ShowAsync();
     }
 
     // --- Export / Import settings -----------------------------------------

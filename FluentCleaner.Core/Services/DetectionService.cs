@@ -61,7 +61,7 @@ public class DetectionService
     }
 
     private static RegistryKey? OpenKey(string hive, string subKey) =>
-        CleaningService.OpenHive(hive)?.OpenSubKey(subKey, writable: false);
+        RegistryHelpers.OpenHive(hive)?.OpenSubKey(subKey, writable: false);
 
     private bool CheckFile(string rawPath)
     {

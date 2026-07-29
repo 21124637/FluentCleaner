@@ -45,5 +45,10 @@ public static class CategoryResolver
         return new CategoryInfo("Other Applications", 2000);
     }
 
-    public readonly record struct CategoryInfo(string Name, int Order);
+    public readonly struct CategoryInfo
+    {
+        public CategoryInfo(string name, int order) { Name = name; Order = order; }
+        public string Name { get; }
+        public int Order { get; }
+    }
 }

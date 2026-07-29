@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
   <resheader name="version"><value>2.0</value></resheader>
@@ -263,6 +263,7 @@
   <data name="DlgNewCleanerNamePlaceholder"><value>自訂清理規則</value></data>
   <data name="DlgNewCleanerAiPlaceholder"><value>由 AI 生成 — 描述需要清理的內容（結果可能有所不同）</value></data>
   <data name="DlgNewCleanerGenerate.Content"><value>產生</value></data>
+  <data name="DlgNewCleanerGenerateBtn"><value>產生</value></data>
   <data name="DlgNewCleanerContentLabel"><value>內容</value></data>
   <data name="DlgNewCleanerLoadTemplate.Content"><value>載入範本</value></data>
   <data name="DlgNewCleanerTitleNew"><value>新增自訂清理規則</value></data>

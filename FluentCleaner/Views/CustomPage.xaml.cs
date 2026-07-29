@@ -218,6 +218,22 @@ public sealed partial class CustomPage : Page, IPageActions, ISearchablePage
             await ShowEditorAsync(vm);
     }
 
+    // opens the ini in the Rule Lab so you can dry-run it right after building
+    private async void TestInLab_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not MenuFlyoutItem { Tag: CustomEntryVm vm } || vm.IsScript) return;
+
+        string content;
+        try   { content = await File.ReadAllTextAsync(vm.FilePath); }
+        catch (Exception ex)
+        {
+            lblStatus.Text = ResourceService.Fmt("St_CustomScriptError", vm.Name, ex.Message);
+            return;
+        }
+
+        new RuleLabWindow(vm.Name, content, ActualTheme).Activate();
+    }
+
     private async void Delete_Click(object sender, RoutedEventArgs e)
     {
         if (sender is not MenuFlyoutItem { Tag: CustomEntryVm vm }) return;

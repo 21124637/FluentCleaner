@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
   <resheader name="version"><value>2.0</value></resheader>
@@ -264,6 +264,7 @@
   <data name="DlgNewCleanerNamePlaceholder"><value>Min renser</value></data>
   <data name="DlgNewCleanerAiPlaceholder"><value>Generer med AI – beskriv hva som skal renses (resultatene kan variere)</value></data>
   <data name="DlgNewCleanerGenerate.Content"><value>Generer</value></data>
+  <data name="DlgNewCleanerGenerateBtn"><value>Generer</value></data>
   <data name="DlgNewCleanerContentLabel"><value>Innhold</value></data>
   <data name="DlgNewCleanerLoadTemplate.Content"><value>Last inn mal</value></data>
   <data name="DlgNewCleanerTitleNew"><value>Ny egendefinert renser</value></data>
