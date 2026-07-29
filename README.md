@@ -63,6 +63,8 @@ Older versions of both are available in [Releases](https://github.com/builtbybel
 
 > 💬 **Classic or Modern?** [Vote here](https://github.com/builtbybel/FluentCleaner/discussions/100) — curious which one people actually end up using day to day.
 
+> 🔒 **Why isn't Classic open source yet?** [Read the project note](FluentCleaner.Classic/WHY_CLASSIC_IS_CLOSED_SOURCE.md).
+
 ## ❤️ Support
 
 no company behind this, no investors, no marketing department. just one person building a tool because the alternative got worse every year. every bit of support helps keep it going
@@ -97,8 +99,6 @@ FluentCleaner just gives you more control over what exactly gets cleaned
 
 </details>
 
-</details>
-
 <details>
 <summary>FluentCleaner (Modern/WinUI version) shows "Unknown Hard Error" or won't launch</summary>
 
@@ -128,8 +128,6 @@ every entry is specific, inspectable, and auditable. that's the whole point.
 winapp2.ini comes in different variants depending on which tool you're using.
 FluentCleaner uses the original CCleaner flavor, the same one that powered
 the tool back when it was still worth using
-
-</details>
 
 </details>
 
@@ -339,6 +337,8 @@ FluentCleaner targets things that are unambiguously junk;cache files, temp data,
 
 
 fewer features. honest features.
+
+</details>
 
 </details>
 
