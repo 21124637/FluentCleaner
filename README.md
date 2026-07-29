@@ -176,7 +176,26 @@ two things that trip people up:
 - **this is only for the app UI.** the cleaning databases (winapp2.ini etc.) come from the upstream Winapp2 project and aren't translated here.
 
 save the file as UTF-8 and you're good. don't see your language yet? that just means nobody's done it — could be you 😉
- 
+
+</details>
+
+<details>
+<summary>can i translate FluentCleaner Classic into my language?</summary>
+
+absolutely 🙌 Classic loads its translations from loose JSON files at runtime, so no recompilation is needed.
+
+1. copy `FluentCleaner.Classic/Localization/en.json`
+2. rename it to your locale (e.g. `fr-FR.json`, `pt-BR.json`, `ja-JP.json`)
+3. translate the string values — **keep every key and placeholder such as `{0}` unchanged**
+4. fill in `_Meta_LanguageDisplayName`, `_Meta_TranslatorName` and optionally `_Meta_TranslatorWebsite`
+5. test it from **Options > Settings > Open localization folder**
+6. submit the JSON file through a pull request or GitHub issue 🎉
+
+see the full [Classic translation guide](FluentCleaner.Classic/TRANSLATING_CLASSIC.md) for details.
+
+</details>
+
+<details>
 <summary>can i use a custom winapp2 database?</summary>
 
 yes. FluentCleaner isn't locked to one source.
