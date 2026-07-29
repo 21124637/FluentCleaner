@@ -45,7 +45,7 @@
   <data name="MenuCleanEntry.Text"><value>Valyti</value></data>
   <data name="MenuExplainEntry.Text"><value>Paaiškinti naudojant DI</value></data>
   <data name="MenuShowSource.Text"><value>Rodyti kodą</value></data>
-  <data name="LblAIDesc.Text"><value>Dešiniuoju pelės mygtuku spustelėkite bet kurį įrašą „Valytojo“ puslapyje → Paaiškinimai naudojant DI. Naudoja „Groq“ (llama-3.3-70b) — nemokamai, jokių sąskaitų. Nieko nesiunčia be jūsų aiškaus veiksmo. Reikalauja asmeninio API rakto.</value></data>
+  <data name="LblAIDesc.Text"><value>Dešiniuoju pelės mygtuku spustelėkite bet kurį įrašą „Valytojo“ puslapyje → Paaiškinimai naudojant DI. Pasirinkite „Groq“, „OpenAI“ arba „Anthropic“. Nieko nesiunčiama be jūsų aiškaus veiksmo. Reikia asmeninio API rakto.</value></data>
   <data name="LblAICustomHint.Text"><value>💡 Išsaugojus raktą, DI funkcija tampa prieinama ir puslapyje „Naudotojo valymai“ – apibūdinkite, ką reikia išvalyti, ir ji jums sukurs parengtą naudoti „Winapp2“ įrašą arba „PowerShell“ scenarijų.</value></data>
   <data name="ResultsHeader.Text"><value>Rezultatai</value></data>
   <data name="BtnBackToResults.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip"><value>Grįžti prie rezultatų</value></data>
@@ -165,7 +165,7 @@
   <data name="BtnApplyPath.Content"><value>Taikyti</value></data>
   <data name="BtnRemovePath.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip"><value>Pašalinti naudotojo DB</value></data>
   <data name="RestartBar.Title"><value>Reikia paleisti iš naujo</value></data>
-  <data name="RestartBar.Message"><value>Paleiskite „FluentCleaner“ iš naujo, kad įkelti atnaujintą duomenų bazę.</value></data>
+  <data name="RestartBar.Message"><value>Atnaujintos duomenų bazės įkėlimui paleiskite „FluentCleaner“ iš naujo.</value></data>
   <data name="SectionPostClean.Text"><value>Veiksmai po valymo</value></data>
   <data name="LblPostCleanDesc.Text"><value>Viena komanda eilutėje — vykdoma paeiliui po kiekvieno valymo ciklo.</value></data>
   <data name="SectionExclusions.Text"><value>Globalios išimtys</value></data>
@@ -174,10 +174,19 @@
   <data name="LblHistoryDesc.Text"><value>Stebėkite, kiek šiukšlių susikaupia laikui bėgant.</value></data>
   <data name="LblCleanHistory.Text"><value>Valyti istoriją</value></data>
   <data name="BtnClearHistory.Content"><value>Pašalinti istoriją</value></data>
+  <data name="SectionScheduler.Text"><value>Suplanuotas valymas</value></data>
+  <data name="LblSchedulerDesc.Text"><value>Atlieka tokį patį valymą kaip ir naudojant /AUTO „Windows“ užduočių planavimo priemonėje. Užduotis vykdoma tik prisijungus ir nereikalauja administratoriaus teisių.</value></data>
+  <data name="SchedulerEnabled.Header"><value>Įjungti suplanuotą valymą</value></data>
+  <data name="SchedulerFrequency.Header"><value>Dažnis</value></data>
+  <data name="SchedulerTime.Header"><value>Laikas</value></data>
+  <data name="SchedulerShutdown.Content"><value>Po to išjungti kompiuterį</value></data>
+  <data name="SchedulerApply.Content"><value>Taikyti</value></data>
+  <data name="SchedulerOpen.Content"><value>Atverti „Windows“ užduočių planavimo priemonę</value></data>
   <data name="SectionAI.Text"><value>DI paaiškinimai</value></data>
   <data name="LblAIOptIn.Text"><value>sutikimas</value></data>
   <data name="LblAIPreview.Text"><value>peržiūra</value></data>
   <data name="BtnAIDiscussion.Content"><value>Turit minčių? Prisijunkite prie diskusijos →</value></data>
+  <data name="CboAIProvider.Header"><value>Tiekėjas</value></data>
   <data name="BtnSaveApiKey.Content"><value>Išsaugoti</value></data>
   <data name="BtnTestApiKey.Content"><value>Testuoti</value></data>
   <data name="BtnGetApiKey.Content"><value>Gauti raktą</value></data>
@@ -217,6 +226,17 @@
   <data name="St_MenuCheckUpdates"><value>Tikrinti, ar yra naujinimų</value></data>
   <data name="St_ApiKeyMissing"><value>⚠ Pirmiausia įveskite API raktą.</value></data>
   <data name="St_ApiKeyTesting"><value>Testuojama…</value></data>
+  <data name="Scheduler_FreqDaily"><value>Kasdien</value></data>
+  <data name="Scheduler_FreqWeekly"><value>Kas savaitę (Pirmadieniais)</value></data>
+  <data name="Scheduler_FreqLogon"><value>Prisijungiant</value></data>
+  <data name="Scheduler_StatusActive"><value>✓ Suplanuota užduotis aktyvi.</value></data>
+  <data name="Scheduler_StatusInactive"><value>✗ Nesuplanuota.</value></data>
+  <data name="Scheduler_Applying"><value>Pritaikoma…</value></data>
+  <data name="Scheduler_ErrorExecutablePath"><value>Nepavyko nustatyti kelio iki „FluentCleaner“ vykdomojo failo.</value></data>
+  <data name="Scheduler_ResultCreated"><value>Supalnuota užduotis sukurta.</value></data>
+  <data name="Scheduler_ResultNothingToRemove"><value>Nėra ką pašalinti.</value></data>
+  <data name="Scheduler_ResultRemoved"><value>Suplanuota užduotis pašalinta.</value></data>
+  <data name="Scheduler_ErrorSchtasks"><value>„Windows“ užduočių planavimo priemonės klaida.</value></data>
   <data name="St_ExportSuccess"><value>Parametrai eksportuoti į {0}</value></data>
   <data name="St_ExportFailed"><value>Eksportas nepavyko: {0}</value></data>
   <data name="St_ImportSuccess"><value>Parametrai importuoti iš {0}</value></data>
@@ -277,10 +297,10 @@
   <!-- ============================================================
        AI EXPLAINER
   ============================================================ -->
-  <data name="AI_NoKey"><value>Nesukonfigūruotas API raktas. Eikite į Parametrai → DI paaiškinimai ir pridėkite „Groq API“ raktą (gaunamas nemokamai puslapyje console.groq.com).</value></data>
-  <data name="AI_ApiError"><value>„Groq API“ klaida: {0}</value></data>
+  <data name="AI_NoKey"><value>Pasirinktam tiekėjui nesukonfigūruotas API raktas. Eikite į Parametrai → DI paaiškinimai ir pridėkite raktą.</value></data>
+  <data name="AI_ApiError"><value>„{0}“ API klaida: {1}</value></data>
   <data name="AI_NoResponse"><value>Negautas atsakymas.</value></data>
-  <data name="AI_NetworkError"><value>Nepavyko pasiekti „Groq API“: {0}</value></data>
+  <data name="AI_NetworkError"><value>Nepavyko pasiekti „{0}“ API: {1}</value></data>
   <data name="AI_NoKeyShort"><value>Nesukonfigūruotas API raktas – eikite į Parametrai → DI paaiškinimai.</value></data>
 
   <!-- ============================================================
