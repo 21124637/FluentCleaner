@@ -11,6 +11,8 @@
     "BasicSettings_OpenLocalizationError":  "Der Lokalisierungsordner konnte nicht geöffnet werden: {0}",
     "BasicSettings_ChkWinapp2":  "Winapp2.ini (integriert)",
     "BasicSettings_ChkWinapp3":  "Winapp3.ini",
+    "BasicSettings_Winapp2Desc":  "Empfohlene Standarddatenbank für die alltägliche Bereinigung.",
+    "BasicSettings_Winapp3Desc":  "Experimentell — aggressivere Einträge, Verwendung auf eigene Gefahr.",
     "BasicSettings_ChkCustomDb":  "Eigene Datenbank",
     "BasicSettings_BtnBrowse":  "Wählen...",
     "BasicSettings_BtnReload":  "Neu laden",

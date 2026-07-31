@@ -11,6 +11,8 @@
     "BasicSettings_OpenLocalizationError":  "The localization folder could not be opened: {0}",
     "BasicSettings_ChkWinapp2":  "Winapp2.ini (built-in)",
     "BasicSettings_ChkWinapp3":  "Winapp3.ini",
+    "BasicSettings_Winapp2Desc":  "Recommended standard database for everyday cleaning.",
+    "BasicSettings_Winapp3Desc":  "Experimental — more aggressive entries, use at your own risk.",
     "BasicSettings_ChkCustomDb":  "Custom database",
     "BasicSettings_BtnBrowse":  "Browse…",
     "BasicSettings_BtnReload":  "Reload",
