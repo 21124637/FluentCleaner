@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <!-- ============================================================
+       TRANSLATOR CREDIT
+       Leave the value empty in the source (en-US) file.
+       Each translator fills this in their own Strings\{lang}\Resources.resw,
+       e.g.: Translation: Jane Doe · jane.example.com
+  ============================================================ -->
+  <data name="LblTranslatorCredit"><value>Traducere:Coman Dănuț</value></data>
+
+  <!-- ============================================================
+       MAIN WINDOW
+  ============================================================ -->
+<data name="NavCleaner.Content"><value>Curățare</value></data>
+<data name="NavTerminal.Content"><value>Terminal</value></data>
+<data name="NavCustom.Content"><value>Personalizat</value></data>
+<data name="SearchBox.PlaceholderText"><value>Căutare</value></data>
+<data name="BtnPageActions.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip"><value>Acțiuni pentru pagină</value></data>
+
+<!-- Fereastra principală — TeachingTip pentru donații -->
+<data name="DonationBanner.Title"><value>Îți place FluentCleaner?</value></data>
+<data name="DonationBanner.Subtitle"><value>Dacă această aplicație îți economisește timp, ia în considerare să îi susții dezvoltarea.</value></data>
+<data name="BtnDonatePayPal.Content"><value>PayPal</value></data>
+<data name="BtnDonateKoFi.Content"><value>Ko-fi</value></data>
+<data name="BtnDonateGitHub.Content"><value>Dă un Star pe GitHub</value></data>
+<data name="BtnDonateLater.Content"><value>Poate mai târziu</value></data>
+<data name="St_NoActions"><value>Nu există acțiuni pentru această pagină</value></data>
+
+  <!-- ============================================================
+       CLEANER PAGE — static XAML strings (x:Uid)
+  ============================================================ -->
+<data name="CleanerHint.Text"><value>Winapp2.ini se încarcă automat la pornire.</value></data>
+<data name="BtnCategoryActions.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip"><value>Acțiuni pentru categorie</value></data>
+<data name="MenuSelectAll.Text"><value>Selectează tot</value></data>
+<data name="MenuSelectNone.Text"><value>Deselectează tot</value></data>
+<data name="MenuSelectDefaults.Text"><value>Selectează valorile implicite</value></data>
+<data name="MenuAnalyzeCategory.Text"><value>Analizează categoria</value></data>
+<data name="MenuCleanCategory.Text"><value>Curăță categoria</value></data>
+<data name="BtnEntryActions.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip"><value>Acțiuni pentru element</value></data>
+<data name="MenuAnalyzeEntry.Text"><value>Analizează</value></data>
+<data name="MenuCleanEntry.Text"><value>Curăță</value></data>
+<data name="MenuExplainEntry.Text"><value>Explică cu AI</value></data>
+<data name="MenuShowSource.Text"><value>Afișează sursa</value></data>
+<data name="LblAIDesc.Text"><value>Faceți clic dreapta pe orice element din pagina Curățare → Explică cu AI. Alegeți Groq, OpenAI sau Anthropic. Nimic nu este trimis fără acțiunea dumneavoastră explicită. Necesită propria cheie API.</value></data>
+<data name="LblAICustomHint.Text"><value>💡 După ce cheia este salvată, pagina Curățători personalizați deblochează și funcțiile AI — descrieți ce doriți să fie curățat, iar aplicația generează un element Winapp2 sau un script PowerShell gata de utilizare.</value></data>
+<data name="ResultsHeader.Text"><value>Rezultate</value></data>
+<data name="BtnBackToResults.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip"><value>Înapoi la rezultate</value></data>
+<data name="BtnCleanDetail.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip"><value>Șterge aceste fișiere acum</value></data>
+<data name="MenuExcludeFile.Text"><value>Exclude fișierul</value></data>
+<data name="MenuExcludeFolder.Text"><value>Exclude folderul</value></data>
+<data name="BtnAnalyze.Content"><value>Analizează</value></data>
+<data name="BtnCancel.Content"><value>Anulează</value></data>
+<data name="BtnRunCleaner.Content"><value>Rulează curățarea</value></data>
+
+<!-- Cleaner Page — IPageActions (built in code) -->
+<data name="St_MenuSelectAll"><value>Selectează tot</value></data>
+<data name="St_MenuSelectNone"><value>Deselectează tot</value></data>
+<data name="St_MenuSelectDefaults"><value>Selectează valorile implicite</value></data>
+<data name="St_MenuExpandAll"><value>Extinde tot</value></data>
+<data name="St_MenuCollapseAll"><value>Restrânge tot</value></data>
+<data name="St_MenuSortDesc"><value>Sortează după dimensiune ↓</value></data>
+<data name="St_MenuSortAsc"><value>Sortează după dimensiune ↑</value></data>
+<data name="St_MenuRefresh"><value>Reîmprospătează</value></data>
+
+<!-- Cleaner Page — detail view labels -->
+<data name="DetailHeaderFiles.Text"><value>Fișiere</value></data>
+<data name="DetailHeaderRegistry.Text"><value>Registru</value></data>
+
+<!-- Cleaner Page — result line suffixes (used in code) -->
+<data name="SuffixFiles"><value>fișiere</value></data>
+<data name="SuffixRegistry"><value>registru</value></data>
+<data name="SuffixFilesSingular"><value>fișier(e)</value></data>
+<data name="SuffixRegistryItems"><value>element(e) din registru</value></data>
+<data name="LabelCleaningComplete"><value>Curățarea s-a încheiat.</value></data>
+
+<!-- Cleaner Page — dialogs -->
+<data name="DlgBrowsersTitle"><value>Browsere deschise</value></data>
+<data name="DlgBrowsersContinue"><value>Continuă oricum</value></data>
+<data name="DlgBrowsersCancel"><value>Anulează</value></data>
+<data name="DlgBrowsersMessage"><value>Închideți aceste aplicații pentru cele mai bune rezultate:\n{0}\n\nBrowserele deschise blochează fișierele de cache și istoricul — acestea vor fi omise în timpul curățării.</value></data>
+
+<data name="DlgWarningTitle"><value>Avertisment privind curățarea</value></data>
+<data name="DlgWarningContinue"><value>Continuă</value></data>
+<data name="DlgWarningCancel"><value>Anulează</value></data>
+<data name="DlgWarningMessage"><value>Intrările Winapp2 selectate includ următoarele avertismente:</value></data>
+
+<data name="DlgExplainThinking"><value>Se analizează…</value></data>
+<data name="DlgExplainClose"><value>Închide</value></data>
+
+<data name="DlgSourceCopy"><value>Copiază</value></data>
+<data name="DlgSourceReport"><value>Raportează intrarea</value></data>
+<data name="DlgSourceDryRun"><value>Testare</value></data>
+
+<data name="RuleLabTitle"><value>Laborator de reguli — {0}</value></data>
+<data name="DlgSourceHint"><value>Editați regulile, apoi folosiți Testare pentru a previzualiza rezultatele.</value></data>
+<data name="DlgSourceScanning"><value>Se scanează…</value></data>
+<data name="DlgSourceNoEntry"><value>Nu există o intrare validă — sunt necesare Detect și FileKey.</value></data>
+<data name="DlgSourceFound"><value>{0} fișiere · {1}</value></data>
+<data name="DlgSourceMore"><value>… și încă {0}</value></data>
+<data name="DlgSourceError"><value>Scanarea a eșuat: {0}</value></data>
+<data name="DlgSourceCancel"><value>Anulează</value></data>
+<data name="DlgSourceCancelled"><value>Anulat.</value></data>
+
+<data name="DlgRestartTitle"><value>Este necesară repornirea</value></data>
+<data name="DlgRestartMessage"><value>FluentCleaner trebuie repornit pentru a aplica modificările.</value></data>
+<data name="DlgRestartNow"><value>Repornește acum</value></data>
+<data name="DlgRestartLater"><value>Mai târziu</value></data>
+
+<!-- ============================================================
+     MESAJE DE STARE — CleanerPageViewModel (șiruri de formatare)
+============================================================ -->
+<data name="St_Loading"><value>Se încarcă Winapp2.ini...</value></data>
+<data name="St_SearchFound"><value>Sunt afișate {0} intrări corespunzătoare.</value></data>
+<data name="St_SearchNone"><value>Nu au fost găsite intrări corespunzătoare.</value></data>
+<data name="St_ParsingDatabases"><value>Se analizează bazele de date...</value></data>
+<data name="St_AnalysisReady"><value>Analiza este gata — au fost găsite {0} aplicații în {1} intrări.</value></data>
+<data name="St_NothingSelected"><value>Nu este selectat nimic.</value></data>
+<data name="St_Scanning"><value>Se scanează...</value></data>
+<data name="St_ScanComplete"><value>Scanare finalizată — {0} fișiere, {1} elemente din registru ({2})</value></data>
+<data name="St_ScanCancelled"><value>Scanarea a fost anulată.</value></data>
+<data name="St_Cleaning"><value>Se curăță...</value></data>
+<data name="St_CleanDone"><value>Finalizat — {0} eliberați · {1} omiși (fișiere în uz)</value></data>
+<data name="St_CleanDoneSimple"><value>Finalizat — {0} elemente eliminate · {1} eliberați.</value></data>
+<data name="St_CleanCancelledBytes"><value>Curățarea a fost anulată — {0} eliberați până acum.</value></data>
+<data name="St_CleanCancelled"><value>Curățarea a fost anulată.</value></data>
+<data name="St_EntryScanned"><value>{0}: {1} fișiere, {2} elemente din registru</value></data>
+<data name="St_EntryNothingToClean"><value>{0}: nimic de curățat.</value></data>
+<data name="St_EntryCleanDone"><value>{0}: {1} elemente eliminate · {2} eliberați.</value></data>
+<data name="St_CategoryScanning"><value>Se scanează {0}...</value></data>
+<data name="St_CategoryScanned"><value>{0} scanată — {1} intrări.</value></data>
+<data name="St_CategoryCleaning"><value>Se curăță {0}...</value></data>
+<data name="St_CategoryCleanDone"><value>{0}: {1} elemente eliminate · {2} eliberați.</value></data>
+<data name="St_EntryScanningProgress"><value>Se scanează {0}...</value></data>
+<data name="St_ExcludedFile"><value>Exclus: {0}</value></data>
+<data name="St_ExcludedFolder"><value>Exclus: {0}</value></data>
+
+<!-- Mesaje de progres — CleaningService -->
+<data name="Prog_Deleted"><value>Șters: {0}</value></data>
+<data name="Prog_Registry"><value>Registru: {0}</value></data>
+
+<!-- ============================================================
+     PAGINA SETĂRI — șiruri statice XAML (x:Uid)
+============================================================ -->
+<data name="SettingsTitle.Text"><value>Setări</value></data>
+
+<!-- Settings Page — donation InfoBar -->
+<data name="DonationBar.Title"><value>FluentCleaner devine open-source.</value></data>
+<data name="DonationBar.Message"><value>Am investit multă muncă în acest proiect — dacă îți este util și dorești să-mi mulțumești, o donație ar însemna foarte mult. ♥</value></data>
+<data name="BtnDonate.Content"><value>Susține proiectul</value></data>
+<data name="MenuDonatePayPal.Text"><value>Donează prin PayPal</value></data>
+<data name="MenuDonateKoFi.Text"><value>Donează prin Ko-fi</value></data>
+
+<data name="SectionAppearance.Text"><value>Aspect</value></data>
+<data name="LblTheme.Text"><value>Tema aplicației</value></data>
+<data name="LblThemeDesc.Text"><value>Alege cum va arăta FluentCleaner pe dispozitivul tău.</value></data>
+<data name="ThemeSystem.Content"><value>Implicită a sistemului</value></data>
+<data name="ThemeLight.Content"><value>Deschisă</value></data>
+<data name="ThemeDark.Content"><value>Închisă</value></data>
+
+<data name="LblLanguage.Text"><value>Limbă</value></data>
+<data name="LblLanguageDesc.Text"><value>Suprascrie limba de afișare. Este necesară repornirea pentru aplicarea modificărilor.</value></data>
+<data name="St_LangAuto"><value>Implicită a sistemului</value></data>
+
+<data name="SectionDatabase.Text"><value>Bază de date</value></data>
+<data name="LblDatabaseDesc.Text"><value>Alege ce liste de intrări sunt încărcate pentru scanare și curățare.</value></data>
+
+<data name="LblWinapp2.Text"><value>Winapp2</value></data>
+<data name="BtnUpdateWinapp2.Content"><value>Actualizează</value></data>
+
+<data name="LblWinapp3.Text"><value>Winapp3</value></data>
+<data name="LblWinapp3Tag.Text"><value>experimental</value></data>
+<data name="LblWinapp3Desc.Text"><value>— intrări mai agresive, utilizați pe propria răspundere.</value></data>
+<data name="BtnDownloadWinapp3.Content"><value>Descarcă</value></data>
+<data name="BtnUpdateWinapp3.Content"><value>Actualizează</value></data>
+
+<data name="LblWinappx.Text"><value>Winappx</value></data>
+<data name="LblWinappxTag.Text"><value>bloatware</value></data>
+<data name="LblWinappxDesc.Text"><value>— intrări AppX / bloatware pentru utilitarul de eliminare din Terminal.</value></data>
+<data name="BtnDownloadWinappx.Content"><value>Descarcă</value></data>
+<data name="BtnUpdateWinappx.Content"><value>Actualizează</value></data>
+
+<data name="TxtCustomPath.PlaceholderText"><value>Cale către baza de date personalizată (.ini)</value></data>
+<data name="BtnBrowse.Content"><value>Răsfoiește…</value></data>
+<data name="BtnApplyPath.Content"><value>Aplică</value></data>
+<data name="BtnRemovePath.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip"><value>Elimină baza de date personalizată</value></data>
+
+<data name="RestartBar.Title"><value>Este necesară repornirea</value></data>
+<data name="RestartBar.Message"><value>Reporniți FluentCleaner pentru a încărca baza de date actualizată.</value></data>
+
+<data name="SectionPostClean.Text"><value>Acțiuni după curățare</value></data>
+<data name="LblPostCleanDesc.Text"><value>O comandă pe fiecare linie — se execută succesiv după fiecare operațiune de curățare.</value></data>
+
+<data name="SectionExclusions.Text"><value>Excluderi globale</value></data>
+<data name="LblExclusionsDesc.Text"><value>Căile listate aici nu sunt curățate niciodată — au prioritate față de toate regulile bazei de date.</value></data>
+<data name="LnkProtectedPaths.Content"><value>Vezi căile protejate</value></data>
+<data name="DlgProtectedTitle"><value>Căi protejate</value></data>
+<data name="DlgProtectedDesc"><value>Aceste locații sunt întotdeauna omise, indiferent de regulile bazei de date. Ele conțin date ale extensiilor de browser de care depind unele aplicații (manageri de parole, blocatoare de reclame etc.).</value></data>
+
+<data name="SectionHistory.Text"><value>Istoric</value></data>
+<data name="LblHistoryDesc.Text"><value>Urmărește cât spațiu ocupă fișierele inutile în timp.</value></data>
+<data name="LblCleanHistory.Text"><value>Istoricul curățării</value></data>
+<data name="BtnClearHistory.Content"><value>Șterge istoricul</value></data>
+
+<data name="SectionScheduler.Text"><value>Curățare programată</value></data>
+<data name="LblSchedulerDesc.Text"><value>Execută aceeași curățare ca opțiunea /AUTO folosind Planificatorul de activități Windows. Sarcina rulează doar cât timp sunteți conectat și nu necesită drepturi de administrator.</value></data>
+<data name="SchedulerEnabled.Header"><value>Activează curățarea programată</value></data>
+<data name="SchedulerFrequency.Header"><value>Frecvență</value></data>
+<data name="SchedulerTime.Header"><value>Ora</value></data>
+<data name="SchedulerShutdown.Content"><value>Oprește PC-ul după finalizare</value></data>
+<data name="SchedulerApply.Content"><value>Aplică</value></data>
+<data name="SchedulerOpen.Content"><value>Deschide Planificatorul de activități Windows</value></data>
+
+<data name="SectionAI.Text"><value>Explicații AI</value></data>
+<data name="LblAIOptIn.Text"><value>opțional</value></data>
+<data name="LblAIPreview.Text"><value>previzualizare</value></data>
+<data name="BtnAIDiscussion.Content"><value>Ai sugestii? Alătură-te discuției →</value></data>
+<data name="CboAIProvider.Header"><value>Furnizor</value></data>
+<data name="BtnSaveApiKey.Content"><value>Salvează</value></data>
+<data name="BtnTestApiKey.Content"><value>Testează</value></data>
+<data name="BtnGetApiKey.Content"><value>Obține cheia</value></data>
+
+<data name="SectionBackup.Text"><value>Copie de rezervă</value></data>
+<data name="LblBackupDesc.Text"><value>Exportă sau importă setările într-un fișier JSON. Pentru modul portabil, plasează un fișier settings.json lângă executabil.</value></data>
+<data name="BtnExport.Content"><value>Exportă</value></data>
+<data name="BtnImport.Content"><value>Importă</value></data>
+<data name="LblPortableActive.Text"><value>📦 Modul portabil este activ — setările sunt stocate lângă executabil</value></data>
+
+<data name="SectionAbout.Text"><value>Despre</value></data>
+<data name="LblCopyright.Text"><value>© 2026 O aplicație creată de Belim</value></data>
+<!-- (LblTranslatorCredit este definit în partea de sus a acestui fișier) -->
+<data name="BtnGitHub.Content"><value>GitHub</value></data>
+<data name="BtnReportIssue.Content"><value>Raportează o problemă</value></data>
+<data name="BtnIconCredit.Content"><value>Pictograma aplicației de naderi</value></data>
+<data name="BtnFAQ.Content"><value>Întrebări frecvente</value></data>
+<data name="LblInsiderBadge.Text"><value>INSIDER</value></data>
+
+<!-- Settings Page — code strings -->
+<data name="St_Winapp3NotDownloaded"><value>Winapp3 nu a fost încă descărcat — faceți clic pe Descarcă.</value></data>
+<data name="St_WinappxNotDownloaded"><value>Winappx nu a fost încă descărcat — faceți clic pe Descarcă.</value></data>
+<data name="St_HistoryNone"><value>încă nu există rulări înregistrate</value></data>
+<data name="St_HistorySummary"><value>{0} rulări · {1} eliberați în total</value></data>
+<data name="St_HistoryItems"><value>{0} elemente</value></data>
+<data name="St_FileNotFound"><value>Fișier negăsit: {0}</value></data>
+<data name="St_CustomPathSaved"><value>Calea personalizată a fost salvată.</value></data>
+<data name="St_Download"><value>Descarcă</value></data>
+<data name="St_Downloading"><value>Se descarcă {0}…</value></data>
+<data name="St_Downloaded"><value>{0} descărcat — {1} KB</value></data>
+<data name="St_DownloadFailed"><value>Descărcarea a eșuat: {0}</value></data>
+<data name="St_FileInfoNotDownloaded"><value>Nedescărcat</value></data>
+<data name="St_FileInfo"><value>{0} intrări • {1} KB • {2}</value></data>
+<data name="St_UpdateAvailable"><value>Actualizare disponibilă — {0}</value></data>
+<data name="St_UpdateMessage"><value>O nouă versiune FluentCleaner este gata pentru descărcare.</value></data>
+<data name="St_UpToDate"><value>Aplicația este actualizată</value></data>
+<data name="St_UpToDateMessage"><value>Versiunea {0} este cea mai recentă.</value></data>
+<data name="St_MenuUpdate"><value>⬆ Actualizare disponibilă — {0}</value></data>
+<data name="St_MenuCheckUpdates"><value>Verifică actualizările</value></data>
+<data name="St_ApiKeyMissing"><value>⚠ Introduceți mai întâi o cheie API.</value></data>
+<data name="St_ApiKeyTesting"><value>Se testează…</value></data>
+
+<data name="Scheduler_FreqDaily"><value>Zilnic</value></data>
+<data name="Scheduler_FreqWeekly"><value>Săptămânal (luni)</value></data>
+<data name="Scheduler_FreqLogon"><value>La conectare</value></data>
+<data name="Scheduler_StatusActive"><value>✓ Curățarea programată este activă.</value></data>
+<data name="Scheduler_StatusInactive"><value>✗ Nu este programată.</value></data>
+<data name="Scheduler_Applying"><value>Se aplică…</value></data>
+<data name="Scheduler_ErrorExecutablePath"><value>Nu s-a putut determina calea executabilului FluentCleaner.</value></data>
+<data name="Scheduler_ResultCreated"><value>Curățarea programată a fost creată.</value></data>
+<data name="Scheduler_ResultNothingToRemove"><value>Nu există nimic de eliminat.</value></data>
+<data name="Scheduler_ResultRemoved"><value>Curățarea programată a fost eliminată.</value></data>
+<data name="Scheduler_ErrorSchtasks"><value>Planificatorul de activități Windows a raportat o eroare.</value></data>
+
+<data name="St_ExportSuccess"><value>Setările au fost exportate în {0}</value></data>
+<data name="St_ExportFailed"><value>Exportul a eșuat: {0}</value></data>
+<data name="St_ImportSuccess"><value>Setările au fost importate din {0}</value></data>
+<data name="St_ImportFailed"><value>Importul a eșuat: {0}</value></data>
+
+<!-- ============================================================
+     CUSTOM PAGE — static XAML strings (x:Uid)
+============================================================ -->
+<data name="CustomTitle.Text"><value>Curățători personalizați</value></data>
+<data name="CustomEmptyHint.Text"><value>Nu există încă curățători personalizați.</value></data>
+<data name="CustomEmptyHint2.Text"><value>Creează un curățător nou — acesta va apărea automat aici.</value></data>
+<data name="MenuEditEntry.Text"><value>Editează</value></data>
+<data name="MenuDeleteEntry.Text"><value>Șterge</value></data>
+<data name="MenuTestEntry.Text"><value>Testează în Rule Lab</value></data>
+<data name="MenuRunEntry.Text"><value>Rulează</value></data>
+<data name="BtnNewCleaner.Content"><value>+ Curățător nou</value></data>
+<data name="BtnRunScript.Text"><value>Rulează</value></data>
+
+<!-- Custom Page — code strings -->
+<data name="St_CustomStatus"><value>{0} curățători · {1} activați</value></data>
+<data name="St_CustomStatusScripts"><value>{0} script(uri)</value></data>
+<data name="St_CustomMenuNew"><value>Curățător personalizat nou</value></data>
+<data name="St_CustomMenuOpenFolder"><value>Deschide folderul personalizat</value></data>
+<data name="St_CustomMenuReddit"><value>Întreabă pe Reddit</value></data>
+<data name="St_CustomMenuNeowin"><value>Forumurile Neowin</value></data>
+<data name="St_CustomMenuDeskmodder"><value>Deskmodder.de</value></data>
+<data name="St_CustomMenuShare"><value>Partajează curățătorul pe GitHub</value></data>
+<data name="St_CustomToggleFailed"><value>Schimbarea stării a eșuat: {0}</value></data>
+<data name="St_CustomDeleteTitle"><value>Ștergeți '{0}'?</value></data>
+<data name="St_CustomDeleteMessage"><value>Acest curățător personalizat va fi eliminat definitiv.</value></data>
+<data name="St_CustomDeleteConfirm"><value>Șterge</value></data>
+<data name="St_CustomDeleteCancel"><value>Anulează</value></data>
+<data name="St_CustomRunning"><value>Se rulează {0}...</value></data>
+<data name="St_CustomScriptError"><value>{0}: scriptul nu a putut fi citit — {1}</value></data>
+<data name="St_CustomCompleted"><value>{0}: finalizat cu succes.</value></data>
+<data name="St_CustomFailed"><value>{0}: a eșuat (cod de ieșire {1}).</value></data>
+<data name="St_CustomEntryNone"><value>nu a fost analizată nicio intrare</value></data>
+<data name="St_CustomEntryOne"><value>1 intrare · {0}</value></data>
+<data name="St_CustomEntryMany"><value>{0} intrări · {1}</value></data>
+<data name="St_CustomEntryEnabled"><value>activat</value></data>
+<data name="St_CustomEntryDisabled"><value>dezactivat</value></data>
+
+<!-- New Cleaner Dialog -->
+<data name="DlgNewCleanerSave"><value>Salvează</value></data>
+<data name="DlgNewCleanerCancel"><value>Anulează</value></data>
+<data name="DlgNewCleanerTypeIni.Content"><value>Intrare Winapp2 (.ini)</value></data>
+<data name="DlgNewCleanerTypePs1.Content"><value>Script PowerShell (.ps1)</value></data>
+<data name="DlgNewCleanerNameHeader"><value>Nume</value></data>
+<data name="DlgNewCleanerNamePlaceholder"><value>Curățătorul meu</value></data>
+<data name="DlgNewCleanerAiPlaceholder"><value>Generează cu AI — descrie ce dorești să fie curățat (rezultatele pot varia)</value></data>
+<data name="DlgNewCleanerGenerate.Content"><value>Generează</value></data>
+<data name="DlgNewCleanerGenerateBtn"><value>Generează</value></data>
+<data name="DlgNewCleanerContentLabel"><value>Conținut</value></data>
+<data name="DlgNewCleanerTest"><value>Testează în Rule Lab</value></data>
+<data name="DlgNewCleanerLoadTemplate.Content"><value>Încarcă șablon</value></data>
+<data name="DlgNewCleanerTitleNew"><value>Curățător personalizat nou</value></data>
+<data name="DlgNewCleanerTitleEdit"><value>Editează — {0}</value></data>
+<data name="DlgNewCleanerGenerating"><value>…</value></data>
+
+<!-- ============================================================
+     AI EXPLAINER
+============================================================ -->
+<data name="AI_NoKey"><value>Nu este configurată nicio cheie API pentru furnizorul selectat. Accesați Setări → Explicații AI pentru a adăuga una.</value></data>
+<data name="AI_ApiError"><value>Eroare API {0}: {1}</value></data>
+<data name="AI_NoResponse"><value>Nu a fost primit niciun răspuns.</value></data>
+<data name="AI_NetworkError"><value>Nu s-a putut realiza conexiunea la {0}: {1}</value></data>
+<data name="AI_NoKeyShort"><value>Nu este configurată nicio cheie API — accesați Setări → Explicații AI.</value></data>
+
+<!-- ============================================================
+     TERMINAL / CLI
+============================================================ -->
+<data name="TerminalPlaceholder.PlaceholderText"><value>curăță firefox · analizează chrome · ajutor</value></data>
+<data name="CLI_Welcome"><value>Terminalul FluentCleaner este pregătit.</value></data>
+<data name="CLI_Databases"><value>Baze de date: {0} active — {1} intrări detectate</value></data>
+<data name="CLI_HelpHint"><value>Tastați 'ajutor' pentru lista comenzilor.</value></data>
+<data name="CLI_Version"><value>  FluentCleaner {0}</value></data>
+<data name="CLI_UnknownCommand"><value>  Comandă necunoscută '{0}'. Tastați „help”.</value></data>
+<data name="CLI_NoDrives"><value>  Nu au fost găsite unități.</value></data>
+
+<data name="CLI_ThemeUsage"><value>  Utilizare: theme dark | light | system</value></data>
+<data name="CLI_ThemeSet"><value>  Tema a fost setată la '{0}'.</value></data>
+
+<data name="CLI_BackdropUsage"><value>  Utilizare: backdrop mica | acrylic</value></data>
+<data name="CLI_BackdropSet"><value>  Fundalul a fost setat la '{0}'.</value></data>
+
+<data name="CLI_NoMatch"><value>  Nu există intrări care corespund cu '{0}'.</value></data>
+<data name="CLI_CleanEntry"><value>  {0}: {1} elemente · {2}</value></data>
+<data name="CLI_CleanDone"><value>  Gata — {0} elemente eliminate · {1} eliberați.</value></data>
+<data name="CLI_NothingToClean"><value>  Nimic de curățat.</value></data>
+
+<data name="CLI_AnalyzeEntry"><value>  {0}: {1} fișiere · {2} elemente din registru · {3}</value></data>
+<data name="CLI_AnalyzeTotal"><value>  Total: {0} găsite.</value></data>
+<data name="CLI_NothingFound"><value>  Nu s-a găsit nimic.</value></data>
+
+<data name="CLI_ListEntries"><value>  — {0} intrări.</value></data>
+<data name="CLI_ListCategories"><value>  — {0} categorii.</value></data>
+
+<data name="CLI_AppxUsage"><value>  Utilizare: appx list | appx scan | appx remove &lt;nume&gt; | appx remove all</value></data>
+<data name="CLI_AppxListStart"><value>  Se listează toate pachetele AppX instalate...</value></data>
+<data name="CLI_AppxNoPackages"><value>  Nu au fost găsite pachete.</value></data>
+<data name="CLI_AppxListDone"><value>  — {0} pachet(e) instalat(e). Folosiți 'appx remove &lt;nume&gt;' pentru dezinstalare.</value></data>
+
+<data name="CLI_AppxScanStart"><value>  Se scanează pachetele instalate...</value></data>
+<data name="CLI_AppxNothingFound"><value>  Nu s-a găsit nimic — sistemul pare curat.</value></data>
+<data name="CLI_AppxScanDone"><value>  — {0} pachet(e) găsit(e). Folosiți 'appx remove &lt;nume&gt;' sau 'appx remove all'.</value></data>
+
+<data name="CLI_AppxRemoveUsage"><value>  Utilizare: appx remove &lt;nume&gt; | appx remove all</value></data>
+<data name="CLI_AppxRemoveScanStart"><value>  Se caută pachetele instalate...</value></data>
+<data name="CLI_AppxNothingToRemove"><value>  Nu există nimic de eliminat.</value></data>
+<data name="CLI_AppxRemoving"><value>  Se elimină {0}...</value></data>
+<data name="CLI_AppxRemoveOk"><value>  OK  {0} a fost eliminat.</value></data>
+<data name="CLI_AppxRemoveErr"><value>  EROARE {0} — eliminarea a eșuat (este posibil să nu fie instalat sau să fie necesare drepturi de administrator).</value></data>
+<data name="CLI_AppxRemoveDone"><value>  Gata — {0} pachet(e) eliminate.</value></data>
+<data name="CLI_AppxNothingRemoved"><value>  Nu a fost eliminat nimic.</value></data>
+
+<data name="CLI_AppxDisabled"><value>  Baza de date Winappx este dezactivată — activați-o din Setări.</value></data>
+<data name="CLI_AppxNotFound"><value>  Winappx.ini nu a fost găsit — descărcați-l din Setări.</value></data>
+
+</root>
